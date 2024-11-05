@@ -49,9 +49,15 @@ public class FPSController : MonoBehaviour
     private Vector3 originalPosition;
     private Vector3 shakeOffset;
     [SerializeField] private Vector3 _shakeStrength;
-    private float shakeDuration = 0.5f;
+    private float shakeDuration = 0.1f;
     private float shakeTimer = 0f;
 
+    [SerializeField] private GameObject Weapon;
+    public Weapon _currentWeapon;
+    public static System.Action<int, int> OnAmmoChanged;
+
+    private InputAction _pickupAction;
+    [SerializeField] LayerMask _itemLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -63,12 +69,14 @@ public class FPSController : MonoBehaviour
         _sprintAction = _playerInput.actions["Sprint"];
         _crouchAction = _playerInput.actions["Crouch"];
         _shootAction = _playerInput.actions["Shoot"];
+        _pickupAction = _playerInput.actions["Pick Up"];
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         speed = _moveSpeed;
         _characterController.height = _normalHeight;
         originalCamY = Camera.main.transform.position.y;
         originalPosition = Camera.main.transform.position;
+        _currentWeapon = Weapon.GetComponent<Weapon>();
     }
 
     // Update is called once per frame
@@ -80,6 +88,7 @@ public class FPSController : MonoBehaviour
         Jump();
         Crouch();
         Shoot();
+        PickUp();
 
         _move = transform.right * input.x + transform.forward * input.y;
         _verticalVelocity.y += _gravityScale * -9.81f * Time.deltaTime;
@@ -186,7 +195,31 @@ public class FPSController : MonoBehaviour
     {
         if (_shootAction.IsPressed())
         {
-            shakeTimer = shakeDuration; 
+            shakeTimer = shakeDuration;
+            _currentWeapon.Shoot();
+            InvokeAmmoChanged();
         }
+    }
+
+    private void PickUp()
+    {
+        if (_pickupAction.IsPressed()) 
+        {
+            Debug.Log("Pick up called");
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            if (Physics.Raycast(ray, out RaycastHit hitinfo, 5, _itemLayer))
+            {
+                Debug.Log("Pick up hit");
+                Debug.Log("pickup object: " + hitinfo.collider.gameObject.name);
+                Item item = hitinfo.collider.GetComponent<Item>();
+                item.Use(this);
+                Destroy(hitinfo.collider.gameObject);
+            }
+        }
+    }
+
+    public void InvokeAmmoChanged()
+    {
+        OnAmmoChanged?.Invoke(_currentWeapon.currentAmmo, _currentWeapon.maxAmmo);
     }
 }
