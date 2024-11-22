@@ -69,13 +69,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Change Weapon",
-                    "type": "Button",
+                    "name": "Switch Weapon",
+                    "type": "Value",
                     "id": "d627b560-db1f-4948-86fe-9c1b784e6bb0",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Reload",
@@ -254,11 +254,11 @@
                 {
                     "name": "",
                     "id": "6c4cd792-4578-4892-af32-4c18923fc9be",
-                    "path": "",
+                    "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Change Weapon",
+                    "action": "Switch Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

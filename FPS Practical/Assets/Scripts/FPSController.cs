@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,7 +15,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] private float _gravityScale = 1f;
     [SerializeField] private float _currentSpeedMult = 1f;
     [SerializeField] private float _sprintSpeedMult;
-    [SerializeField] private float _moveSpeedTransition = 2f;
+    [SerializeField] private float _moveSpeedTransition = 4f;
     [SerializeField] private float _normalHeight = 2f;
     [SerializeField] private float _crouchHeight = 1f;
     [SerializeField] private PlayerInput _playerInput;
@@ -27,11 +28,17 @@ public class FPSController : MonoBehaviour
     private InputAction _sprintAction;
     private InputAction _crouchAction;
     private InputAction _aimAction;
+    private InputAction _switchWeaponAction;
+    private InputAction _reloadAction;
 
     private Vector3 _move;
     public float speed;
     public bool crouching = false;
+    public bool sliding = false;
     private Vector3 _verticalVelocity = Vector3.zero;
+    public float slideSpeed;
+    private Vector3 slideDirection;
+    [SerializeField] private float slideDeceleration = 1f;
 
     private Vector3 _mouseDelta;
     private float cameraPitch = 0f;
@@ -57,7 +64,7 @@ public class FPSController : MonoBehaviour
     private float shakeTimer = 0f;
 
     [SerializeField] private Camera _weaponCamera;
-    [SerializeField] private float _FOVtransition = 5f;
+    [SerializeField] private float _FOVtransition = 7f;
     [SerializeField] private float _sprintFOVmult = 0.8f;
     [SerializeField] private float _aimFOVmult = 1.3f;
     private float sprintFOV;
@@ -72,9 +79,15 @@ public class FPSController : MonoBehaviour
     [SerializeField] private float _recoilOffsetY = 0.3f;
     public float _currentRecoilY;
 
-    [SerializeField] private GameObject Weapon;
+    [Header("Weapon List")]
+    public List<Weapon> weapons = new List<Weapon>();
+    //[SerializeField] private GameObject Weapon;
+    private int _currentWeaponIndex = 0;
     public Weapon _currentWeapon;
     public static System.Action<int, int> OnAmmoChanged;
+    public GameObject _weaponHolder;
+    private bool reloading;
+    [SerializeField] private TMP_Text _reloadingText;
 
     private InputAction _pickupAction;
     [SerializeField] LayerMask _itemLayer;
@@ -92,6 +105,8 @@ public class FPSController : MonoBehaviour
         _shootAction = _playerInput.actions["Shoot"];
         _pickupAction = _playerInput.actions["Pick Up"];
         _aimAction = _playerInput.actions["Aim"];
+        _switchWeaponAction = _playerInput.actions["Switch Weapon"];
+        _reloadAction = _playerInput.actions["Reload"];
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -106,7 +121,7 @@ public class FPSController : MonoBehaviour
         sprintFOV = normalFOV * _sprintFOVmult;
         aimFOV = normalFOV * _aimFOVmult;
 
-        _currentWeapon = Weapon.GetComponent<Weapon>();
+        _currentWeapon = weapons[_currentWeaponIndex].GetComponent<Weapon>();
     }
 
     // Update is called once per frame
@@ -119,17 +134,27 @@ public class FPSController : MonoBehaviour
         Crouch();
         Shoot();
         PickUp();
+        SwitchWeapon();
+        
+        if(_reloadAction.IsPressed() && !reloading && _currentWeapon.currentAmmo < _currentWeapon.maxAmmo)
+        {
+            StartCoroutine(Reload());
+        }
 
         _move = transform.right * input.x + transform.forward * input.y;
         _verticalVelocity.y += _gravityScale * -9.81f * Time.deltaTime;
 
-        if (_sprintAction.IsPressed() && !crouching)
+        if (_sprintAction.IsPressed() && !crouching && !isAiming)
         {
             _currentSpeedMult = _sprintSpeedMult;
         }
         else _currentSpeedMult = 1f;
 
-        speed = Mathf.Lerp(speed, _moveSpeed * _currentSpeedMult, _moveSpeedTransition * Time.deltaTime);
+        if (sliding)
+        {
+            slideSpeed = Mathf.Lerp(slideSpeed, 0f, slideDeceleration * Time.deltaTime);
+        }
+        else speed = Mathf.Lerp(speed, _moveSpeed * _currentSpeedMult, _moveSpeedTransition * Time.deltaTime);
 
         movementforward = Vector3.Magnitude(transform.forward - _move);
         if (movementforward < 1f && speed > _moveSpeed * 1.1f) isSpeeding = true;
@@ -138,10 +163,15 @@ public class FPSController : MonoBehaviour
         if (_aimAction.IsPressed()) isAiming = true;
         else isAiming = false;
 
-        if (_move != Vector3.zero && _characterController.isGrounded) moving = true;
+        if (_move != Vector3.zero && _characterController.isGrounded && !sliding) moving = true;
         else moving = false;
 
-        Vector3 finalMove = _verticalVelocity + (_move * speed);
+        Vector3 finalMove;
+        if (sliding)
+        {
+            finalMove = _verticalVelocity + (slideSpeed * slideDirection);
+        }
+        else finalMove = _verticalVelocity + (_move * speed);
 
         _characterController.Move(finalMove * Time.deltaTime);
     }
@@ -199,14 +229,14 @@ public class FPSController : MonoBehaviour
         if (isAiming)
         {
             currentFOV = Mathf.Lerp(currentFOV, aimFOV, _FOVtransition * Time.deltaTime);
-            Weapon.transform.localPosition = Vector3.SmoothDamp(Weapon.transform.localPosition, new Vector3(0f, -0.1f, Weapon.transform.localPosition.z),
-                ref aimingSpeed, 0.02f);
+            _currentWeapon.transform.localPosition = Vector3.SmoothDamp(_currentWeapon.transform.localPosition, 
+                new Vector3(_currentWeapon.aimPosition.x, _currentWeapon.aimPosition.y, _currentWeapon.aimPosition.z), ref aimingSpeed, 0.02f);
         }
         else
         {
-            Weapon.transform.localPosition = Vector3.SmoothDamp(Weapon.transform.localPosition, new Vector3(0.16f, -0.19f, Weapon.transform.localPosition.z),
-                ref aimingSpeed, 0.02f);
-            if (isSpeeding)
+            _currentWeapon.transform.localPosition = Vector3.SmoothDamp(_currentWeapon.transform.localPosition, 
+                new Vector3(_currentWeapon.hipPosition.x, _currentWeapon.hipPosition.y, _currentWeapon.hipPosition.z), ref aimingSpeed, 0.02f);
+            if (isSpeeding || crouching)
             {
                 currentFOV = Mathf.Lerp(currentFOV, sprintFOV, _FOVtransition * Time.deltaTime);
             }
@@ -221,7 +251,8 @@ public class FPSController : MonoBehaviour
     }
     void HandleCameraRecoil()
     {  
-        _currentRecoilY = ((Random.value - 0.5f) / 2) * _recoilOffsetY;
+        _currentRecoilY = Random.Range(0.75f, 1.0f) * _currentWeapon.recoil;
+        if (isAiming) _currentRecoilY *= 0.6f;
         targetcameraPitch -= Mathf.Abs(_currentRecoilY);
     }
     void Look()
@@ -254,22 +285,36 @@ public class FPSController : MonoBehaviour
             _characterController.height = _crouchHeight;
             _characterController.center = new Vector3(0, _crouchHeight / 2, 0);
             crouching = true;
+            if (isSpeeding && !sliding)
+            {
+                slideSpeed = speed;
+                slideDirection = _move;
+                sliding = true;
+            }
 }
         else
         {
             _characterController.height = _normalHeight;
             _characterController.center = new Vector3(0, 0, 0);
             crouching = false;
+            if (sliding)
+            {
+                sliding = false;
+                speed = slideSpeed;
+            }
         }
     }
     private void Shoot()
     {
-        if (_shootAction.IsPressed())
+        if (_shootAction.IsPressed() && !reloading)
         {
-            shakeTimer = shakeDuration;
-            _currentWeapon.Shoot();
-            InvokeAmmoChanged();
-            HandleCameraRecoil();
+            if (_currentWeapon.Shoot())
+            {
+                shakeTimer = shakeDuration;
+                InvokeAmmoChanged();
+                HandleCameraRecoil();
+                if (_currentWeapon.currentAmmo <= 0) StartCoroutine(Reload());
+            }
         }
     }
 
@@ -285,9 +330,49 @@ public class FPSController : MonoBehaviour
                 Debug.Log("pickup object: " + hitinfo.collider.gameObject.name);
                 Item item = hitinfo.collider.GetComponent<Item>();
                 item.Use(this);
-                Destroy(hitinfo.collider.gameObject);
+                if (hitinfo.collider.gameObject.TryGetComponent(out AmmoItem ammoitem))
+                {
+                    Destroy(hitinfo.collider.gameObject);
+                }
             }
         }
+    }
+    private void SwitchWeapon()
+    {
+        Vector2 scroll = _switchWeaponAction.ReadValue<Vector2>();
+        if (scroll.y < 0)
+        {
+            reloading = false;
+            _currentWeapon.gameObject.SetActive(false);
+            _currentWeaponIndex++;
+            _currentWeaponIndex %= weapons.Count;
+            _currentWeapon = weapons[_currentWeaponIndex];
+            _currentWeapon.gameObject.SetActive(true);
+            InvokeAmmoChanged();
+        }
+        else if(scroll.y > 0)
+        {
+            reloading = false;
+            _currentWeapon.gameObject.SetActive(false);
+            _currentWeaponIndex--;
+            _currentWeaponIndex %= weapons.Count;
+            if (_currentWeaponIndex < 0) _currentWeaponIndex = weapons.Count - 1;
+            _currentWeapon = weapons[_currentWeaponIndex];
+            _currentWeapon.gameObject.SetActive(true);
+            InvokeAmmoChanged();
+        }
+    }
+    private IEnumerator Reload()
+    {
+        reloading = true;
+        _reloadingText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(_currentWeapon.reloadTime);
+
+        _currentWeapon.currentAmmo = _currentWeapon.maxAmmo;
+        reloading = false;
+        _reloadingText.gameObject.SetActive(false);
+        OnAmmoChanged?.Invoke(_currentWeapon.currentAmmo, _currentWeapon.maxAmmo);
     }
 
     public void InvokeAmmoChanged()
