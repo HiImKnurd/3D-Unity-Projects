@@ -37,6 +37,9 @@ public class LightSource : MonoBehaviour
     [Range(0f, 360f)]
     private float _spotlightCutoff = 20f;
 
+    [SerializeField]
+    private int _quantizationCount = 15;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +65,17 @@ public class LightSource : MonoBehaviour
         _material.SetFloat("_lightIntensity", intensity);
         _material.SetVector("_attenuation", attentuation);
         _material.SetFloat("_spotlightCutoff", _spotlightCutoff);
+        _material.SetInteger("_quantizationCount", (int)_quantizationCount);
+    }
+
+    public Vector3 GetDirection()
+    {
+        return _direction;
+    }
+
+    public Material GetMaterial() 
+    {
+        return _material;
     }
 
     private void OnDrawGizmos()

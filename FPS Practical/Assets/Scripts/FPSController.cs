@@ -26,6 +26,7 @@ public class FPSController : MonoBehaviour
     private InputAction _jumpAction;
     private InputAction _sprintAction;
     private InputAction _crouchAction;
+    private InputAction _aimAction;
 
     private Vector3 _move;
     public float speed;
@@ -34,10 +35,13 @@ public class FPSController : MonoBehaviour
 
     private Vector3 _mouseDelta;
     private float cameraPitch = 0f;
+    public float targetcameraPitch;
+    private float rotationY = 0.0f;
 
     [SerializeField] private float _coyoteTime = 0.2f;
     private float coyoteTimeCounter;
 
+    [Header("Camera Settings")]
     private bool moving = false;
     private float bobOffset;
     [SerializeField] private float _bobFrequency;
@@ -52,6 +56,22 @@ public class FPSController : MonoBehaviour
     private float shakeDuration = 0.1f;
     private float shakeTimer = 0f;
 
+    [SerializeField] private Camera _weaponCamera;
+    [SerializeField] private float _FOVtransition = 5f;
+    [SerializeField] private float _sprintFOVmult = 0.8f;
+    [SerializeField] private float _aimFOVmult = 1.3f;
+    private float sprintFOV;
+    private float aimFOV;
+    public float normalFOV;
+    public float currentFOV;
+    public bool isSpeeding = false;
+    public bool isAiming = false;
+    private Vector3 aimingSpeed = Vector3.zero;
+    private float movementforward;
+
+    [SerializeField] private float _recoilOffsetY = 0.3f;
+    public float _currentRecoilY;
+
     [SerializeField] private GameObject Weapon;
     public Weapon _currentWeapon;
     public static System.Action<int, int> OnAmmoChanged;
@@ -63,6 +83,7 @@ public class FPSController : MonoBehaviour
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
+
         _moveAction = _playerInput.actions["Move"];
         _lookAction = _playerInput.actions["Look"];
         _jumpAction = _playerInput.actions["Jump"];
@@ -70,12 +91,21 @@ public class FPSController : MonoBehaviour
         _crouchAction = _playerInput.actions["Crouch"];
         _shootAction = _playerInput.actions["Shoot"];
         _pickupAction = _playerInput.actions["Pick Up"];
+        _aimAction = _playerInput.actions["Aim"];
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
         speed = _moveSpeed;
         _characterController.height = _normalHeight;
+
+        targetcameraPitch = cameraPitch;
         originalCamY = Camera.main.transform.position.y;
         originalPosition = Camera.main.transform.position;
+        currentFOV = normalFOV = Camera.main.fieldOfView;
+        sprintFOV = normalFOV * _sprintFOVmult;
+        aimFOV = normalFOV * _aimFOVmult;
+
         _currentWeapon = Weapon.GetComponent<Weapon>();
     }
 
@@ -93,10 +123,21 @@ public class FPSController : MonoBehaviour
         _move = transform.right * input.x + transform.forward * input.y;
         _verticalVelocity.y += _gravityScale * -9.81f * Time.deltaTime;
 
-        if(_sprintAction.IsPressed() && !crouching) _currentSpeedMult = _sprintSpeedMult;
+        if (_sprintAction.IsPressed() && !crouching)
+        {
+            _currentSpeedMult = _sprintSpeedMult;
+        }
         else _currentSpeedMult = 1f;
 
         speed = Mathf.Lerp(speed, _moveSpeed * _currentSpeedMult, _moveSpeedTransition * Time.deltaTime);
+
+        movementforward = Vector3.Magnitude(transform.forward - _move);
+        if (movementforward < 1f && speed > _moveSpeed * 1.1f) isSpeeding = true;
+        else isSpeeding = false;
+
+        if (_aimAction.IsPressed()) isAiming = true;
+        else isAiming = false;
+
         if (_move != Vector3.zero && _characterController.isGrounded) moving = true;
         else moving = false;
 
@@ -110,19 +151,21 @@ public class FPSController : MonoBehaviour
         HandleCameraPitch();
         BobHandler();
         HandleCameraShake();
+        HandleCameraFOV();
 
         Camera.main.transform.localPosition = originalPosition + shakeOffset + new Vector3(0f, bobOffset, 0f);
     }
-
     void HandleCameraPitch()
     {
         float mouseY = _mouseDelta.y * _verticalSensitivity * Time.deltaTime;
 
-        cameraPitch -= mouseY;
-        cameraPitch = Mathf.Clamp(cameraPitch, -90f, 90f);
+        targetcameraPitch -= mouseY;
+        targetcameraPitch = Mathf.Clamp(targetcameraPitch, -90f, 90f);
+
+        cameraPitch = Mathf.SmoothDamp(cameraPitch, targetcameraPitch, ref rotationY, 0.01f);
+
         Camera.main.transform.localRotation = Quaternion.Euler(cameraPitch, 0, 0);
     }
-
     void BobHandler()
     {
         if(moving)
@@ -139,7 +182,6 @@ public class FPSController : MonoBehaviour
         camtransform.localPosition = new Vector3(camtransform.localPosition.x, originalCamY + bobOffset, camtransform.localPosition.z);
         //Camera.main.transform.localPosition = camtransform.localPosition;
     }
-
     void HandleCameraShake()
     {
         if(shakeTimer > 0)
@@ -152,7 +194,36 @@ public class FPSController : MonoBehaviour
             shakeOffset = Vector3.zero;
         }
     }
+    void HandleCameraFOV()
+    {
+        if (isAiming)
+        {
+            currentFOV = Mathf.Lerp(currentFOV, aimFOV, _FOVtransition * Time.deltaTime);
+            Weapon.transform.localPosition = Vector3.SmoothDamp(Weapon.transform.localPosition, new Vector3(0f, -0.1f, Weapon.transform.localPosition.z),
+                ref aimingSpeed, 0.02f);
+        }
+        else
+        {
+            Weapon.transform.localPosition = Vector3.SmoothDamp(Weapon.transform.localPosition, new Vector3(0.16f, -0.19f, Weapon.transform.localPosition.z),
+                ref aimingSpeed, 0.02f);
+            if (isSpeeding)
+            {
+                currentFOV = Mathf.Lerp(currentFOV, sprintFOV, _FOVtransition * Time.deltaTime);
+            }
+            else
+            {
+                currentFOV = Mathf.Lerp(currentFOV, normalFOV, _FOVtransition * Time.deltaTime);
+            }
+        }
 
+        Camera.main.fieldOfView = currentFOV;
+        _weaponCamera.fieldOfView = currentFOV;
+    }
+    void HandleCameraRecoil()
+    {  
+        _currentRecoilY = ((Random.value - 0.5f) / 2) * _recoilOffsetY;
+        targetcameraPitch -= Mathf.Abs(_currentRecoilY);
+    }
     void Look()
     {
         _mouseDelta = _lookAction.ReadValue<Vector2>();
@@ -198,6 +269,7 @@ public class FPSController : MonoBehaviour
             shakeTimer = shakeDuration;
             _currentWeapon.Shoot();
             InvokeAmmoChanged();
+            HandleCameraRecoil();
         }
     }
 
