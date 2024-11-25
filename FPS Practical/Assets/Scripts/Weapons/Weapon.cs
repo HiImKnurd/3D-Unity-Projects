@@ -8,6 +8,9 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected WeaponData _weaponData;
     [SerializeField] protected TMP_Text _reloadingText;
     [SerializeField] protected ParticleSystem _muzzleFlash;
+    [SerializeField] protected GameObject _hitEffect;
+    public hitEffectSpawner _effectSpawner;
+
     public float nextFireTime;
     public int currentAmmo;
     public int maxAmmo;

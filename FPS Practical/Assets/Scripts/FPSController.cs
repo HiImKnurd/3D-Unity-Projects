@@ -90,6 +90,7 @@ public class FPSController : MonoBehaviour
     [SerializeField] private TMP_Text _reloadingText;
 
     private InputAction _pickupAction;
+    [SerializeField] private hitEffectSpawner _hitEffectSpawner;
     [SerializeField] LayerMask _itemLayer;
 
     // Start is called before the first frame update
@@ -333,6 +334,10 @@ public class FPSController : MonoBehaviour
                 if (hitinfo.collider.gameObject.TryGetComponent(out AmmoItem ammoitem))
                 {
                     Destroy(hitinfo.collider.gameObject);
+                }
+                else if(hitinfo.collider.gameObject.TryGetComponent(out Weapon weapon))
+                {
+                    weapon._effectSpawner = _hitEffectSpawner;
                 }
             }
         }

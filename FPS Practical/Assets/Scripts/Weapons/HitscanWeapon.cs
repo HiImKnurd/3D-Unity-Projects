@@ -23,6 +23,8 @@ public class HitscanWeapon : Weapon
                 Debug.Log("Hit object: " + hitinfo.collider.gameObject.name);
                 GameObject hitObject = hitinfo.collider.gameObject;
 
+                _effectSpawner.SpawnHitEffect(hitinfo.point, hitinfo.normal);
+
                 if (hitObject.TryGetComponent(out Damagable damagable))
                 {
                     damagable.TakeDamage(_weaponData.Damage);
