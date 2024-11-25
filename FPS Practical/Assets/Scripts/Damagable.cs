@@ -11,6 +11,8 @@ public class Damagable : MonoBehaviour
     public Color _damageColor = Color.red;
     private float _damageDuration = 0.3f;
     private Renderer _renderer;
+    [SerializeField] private GameObject _destructionEffect;
+    [SerializeField] private AudioClip _destructionSound;
 
     private void Start()
     {
@@ -42,6 +44,11 @@ public class Damagable : MonoBehaviour
             StartCoroutine(DamageEffect());
         }
 
-        if(health <= 0) Destroy(gameObject);
+        if (health <= 0)
+        {
+            AudioSource.PlayClipAtPoint(_destructionSound, transform.position);
+            Instantiate(_destructionEffect, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 }

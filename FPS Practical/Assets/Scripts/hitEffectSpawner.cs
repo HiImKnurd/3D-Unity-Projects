@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -8,6 +9,7 @@ public class hitEffectSpawner : MonoBehaviour
 {
     private ObjectPool<GameObject> hitEffectPool;
     [SerializeField] private GameObject hitEffectprefab;
+    [SerializeField] private AudioClip hitEffectSound;
 
     private void Start()
     {
@@ -39,6 +41,7 @@ public class hitEffectSpawner : MonoBehaviour
         GameObject effect = hitEffectPool.Get();
         effect.transform.position = position;
         effect.transform.rotation = Quaternion.LookRotation(normal);
+        AudioSource.PlayClipAtPoint(hitEffectSound, position);
         StartCoroutine(ReleaseHitEffect(effect, 3));
     }
     private void OnReturnToPool(GameObject effect)

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AssaultData
   m_EditorClassIdentifier: 
   WeaponName: Assault Rifle
-  Range: 15
+  Range: 25
   Damage: 2
   fireRate: 0.1
   maxAmmo: 40
-  recoil: 3.5
+  recoil: 3
   reloadTime: 1
   projectile: {fileID: 0}

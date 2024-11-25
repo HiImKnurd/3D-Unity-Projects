@@ -50,7 +50,7 @@ public class FPSController : MonoBehaviour
 
     [Header("Camera Settings")]
     private bool moving = false;
-    private float bobOffset;
+    public float bobOffset;
     [SerializeField] private float _bobFrequency;
     [SerializeField] private float _bobAmplitude;
     private float timer = 0f;
@@ -58,7 +58,7 @@ public class FPSController : MonoBehaviour
 
     private InputAction _shootAction;
     private Vector3 originalPosition;
-    private Vector3 shakeOffset;
+    public Vector3 shakeOffset;
     [SerializeField] private Vector3 _shakeStrength;
     private float shakeDuration = 0.1f;
     private float shakeTimer = 0f;
@@ -116,8 +116,8 @@ public class FPSController : MonoBehaviour
         _characterController.height = _normalHeight;
 
         targetcameraPitch = cameraPitch;
-        originalCamY = Camera.main.transform.position.y;
-        originalPosition = Camera.main.transform.position;
+        originalCamY = Camera.main.transform.localPosition.y;
+        originalPosition = Camera.main.transform.localPosition;
         currentFOV = normalFOV = Camera.main.fieldOfView;
         sprintFOV = normalFOV * _sprintFOVmult;
         aimFOV = normalFOV * _aimFOVmult;
@@ -209,8 +209,8 @@ public class FPSController : MonoBehaviour
             bobOffset = Mathf.Lerp(bobOffset, 0, Time.deltaTime);
         }
 
-        Transform camtransform = Camera.main.transform;
-        camtransform.localPosition = new Vector3(camtransform.localPosition.x, originalCamY + bobOffset, camtransform.localPosition.z);
+        //Transform camtransform = Camera.main.transform;
+        //camtransform.localPosition = new Vector3(camtransform.localPosition.x, originalCamY + bobOffset, camtransform.localPosition.z);
         //Camera.main.transform.localPosition = camtransform.localPosition;
     }
     void HandleCameraShake()
@@ -348,22 +348,26 @@ public class FPSController : MonoBehaviour
         if (scroll.y < 0)
         {
             reloading = false;
+            _currentWeapon.StopSounds();
             _currentWeapon.gameObject.SetActive(false);
             _currentWeaponIndex++;
             _currentWeaponIndex %= weapons.Count;
             _currentWeapon = weapons[_currentWeaponIndex];
             _currentWeapon.gameObject.SetActive(true);
+            _currentWeapon.StopSounds();
             InvokeAmmoChanged();
         }
         else if(scroll.y > 0)
         {
             reloading = false;
+            _currentWeapon.StopSounds();
             _currentWeapon.gameObject.SetActive(false);
             _currentWeaponIndex--;
             _currentWeaponIndex %= weapons.Count;
             if (_currentWeaponIndex < 0) _currentWeaponIndex = weapons.Count - 1;
             _currentWeapon = weapons[_currentWeaponIndex];
             _currentWeapon.gameObject.SetActive(true);
+            _currentWeapon.StopSounds();
             InvokeAmmoChanged();
         }
     }
@@ -371,6 +375,7 @@ public class FPSController : MonoBehaviour
     {
         reloading = true;
         _reloadingText.gameObject.SetActive(true);
+        _currentWeapon.PlayReloadSound();
 
         yield return new WaitForSeconds(_currentWeapon.reloadTime);
 

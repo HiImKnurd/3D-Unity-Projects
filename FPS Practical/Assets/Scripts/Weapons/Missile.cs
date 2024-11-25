@@ -7,6 +7,7 @@ public class Missile : Projectile
 {
     [SerializeField] private GameObject explosionEffect;
     [SerializeField] private float explosionRadius = 2f;
+    [SerializeField] private AudioClip explosionSound;
     private Rigidbody rb;
 
     private void Start()
@@ -35,7 +36,7 @@ public class Missile : Projectile
                 
             }
         }
-
+        AudioSource.PlayClipAtPoint(explosionSound, transform.position);
         Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }

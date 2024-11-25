@@ -9,6 +9,10 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected TMP_Text _reloadingText;
     [SerializeField] protected ParticleSystem _muzzleFlash;
     [SerializeField] protected GameObject _hitEffect;
+    [SerializeField] protected AudioClip _shootSound;
+    [SerializeField] protected AudioClip _reloadSound;
+
+    protected AudioSource _audioSource;
     public hitEffectSpawner _effectSpawner;
 
     public float nextFireTime;
@@ -20,6 +24,9 @@ public abstract class Weapon : MonoBehaviour
     public Vector3 hipPosition;
     public float reloadTime;
     public abstract bool Shoot();
+    public abstract void PlayShootSound();
+    public abstract void PlayReloadSound();
+    public abstract void StopSounds();
     private void OnDrawGizmos()
     {
         //Gizmos.DrawSphere(transform.position + barrelPosition, 0.2f);

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SniperData
   m_EditorClassIdentifier: 
   WeaponName: Sniper
-  Range: 15
+  Range: 35
   Damage: 20
   fireRate: 1
   maxAmmo: 10
