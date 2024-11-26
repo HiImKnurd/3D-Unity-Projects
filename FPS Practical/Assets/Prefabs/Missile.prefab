@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 572f51c2c7c1f2249a06c1b887d44583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  travelSpeed: 6
+  travelSpeed: 8
   damage: 50
   explosionEffect: {fileID: 1828176872806910, guid: ea4a23ebac9948d46938a32e5a7edf0e, type: 3}
   explosionRadius: 2

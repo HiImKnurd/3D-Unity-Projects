@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SniperData
   m_EditorClassIdentifier: 
   WeaponName: Sniper
-  Range: 35
+  Range: 100
   Damage: 20
   fireRate: 1
-  maxAmmo: 10
+  maxAmmo: 5
   recoil: 15
   reloadTime: 1.5
   projectile: {fileID: 0}

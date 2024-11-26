@@ -13,6 +13,7 @@ public class Damagable : MonoBehaviour
     private Renderer _renderer;
     [SerializeField] private GameObject _destructionEffect;
     [SerializeField] private AudioClip _destructionSound;
+    [SerializeField] private bool _explosive;
 
     private void Start()
     {
@@ -48,6 +49,25 @@ public class Damagable : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(_destructionSound, transform.position);
             Instantiate(_destructionEffect, transform.position, Quaternion.identity);
+
+            if (_explosive)
+            {
+                Collider[] hits = Physics.OverlapSphere(transform.position, 3f);
+                foreach (var hit in hits)
+                {
+                    GameObject hitObject = hit.gameObject;
+                    if (hitObject.TryGetComponent(out Damagable damagable) && hitObject!= this.gameObject)
+                    {
+                        damagable.TakeDamage(30);
+                    }
+                    else if (hitObject.TryGetComponent(out FPSController player))
+                    {
+                        Debug.Log("ouch");
+
+                    }
+                }
+            }
+
             Destroy(gameObject);
         }
     }

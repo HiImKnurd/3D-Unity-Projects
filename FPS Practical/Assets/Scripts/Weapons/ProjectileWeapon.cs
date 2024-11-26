@@ -51,4 +51,9 @@ public class ProjectileWeapon : Weapon
     {
         if (_audioSource.isPlaying) _audioSource.Stop();
     }
+
+    public override void RefillAmmo()
+    {
+        currentAmmo += maxAmmo - currentAmmo;
+    }
 }

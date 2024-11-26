@@ -218,7 +218,6 @@ MonoBehaviour:
   _hitEffect: {fileID: 0}
   _shootSound: {fileID: 8300000, guid: 00e200b970b3d1b4b81b9991ab877761, type: 3}
   _reloadSound: {fileID: 8300000, guid: 0737c729fd761b443879d8c9b82bb12f, type: 3}
-  _impactSound: {fileID: 8300000, guid: c1c8ca0641fcc6243b3ad7ff9d211071, type: 3}
   _effectSpawner: {fileID: 0}
   nextFireTime: 0
   currentAmmo: 10
@@ -402,7 +401,7 @@ Camera:
     height: 1
   near clip plane: 0.5
   far clip plane: 1000
-  field of view: 10
+  field of view: 3
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

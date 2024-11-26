@@ -39,6 +39,7 @@ public class FPSController : MonoBehaviour
     public float slideSpeed;
     private Vector3 slideDirection;
     [SerializeField] private float slideDeceleration = 1f;
+    private float slopeAllowance = 20f;
 
     private Vector3 _mouseDelta;
     private float cameraPitch = 0f;
@@ -93,6 +94,10 @@ public class FPSController : MonoBehaviour
     [SerializeField] private hitEffectSpawner _hitEffectSpawner;
     [SerializeField] LayerMask _itemLayer;
 
+    private AudioSource _audioSource;
+    [SerializeField] AudioClip _supplyPickupsound;
+    [SerializeField] AudioClip _weaponPickupsound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -123,6 +128,7 @@ public class FPSController : MonoBehaviour
         aimFOV = normalFOV * _aimFOVmult;
 
         _currentWeapon = weapons[_currentWeaponIndex].GetComponent<Weapon>();
+        _audioSource= GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -151,12 +157,6 @@ public class FPSController : MonoBehaviour
         }
         else _currentSpeedMult = 1f;
 
-        if (sliding)
-        {
-            slideSpeed = Mathf.Lerp(slideSpeed, 0f, slideDeceleration * Time.deltaTime);
-        }
-        else speed = Mathf.Lerp(speed, _moveSpeed * _currentSpeedMult, _moveSpeedTransition * Time.deltaTime);
-
         movementforward = Vector3.Magnitude(transform.forward - _move);
         if (movementforward < 1f && speed > _moveSpeed * 1.1f) isSpeeding = true;
         else isSpeeding = false;
@@ -167,10 +167,28 @@ public class FPSController : MonoBehaviour
         if (_move != Vector3.zero && _characterController.isGrounded && !sliding) moving = true;
         else moving = false;
 
+        float slopeangle;
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, _characterController.height * 0.5f + 0.3f))
+        {
+            slopeangle = Vector3.Angle(Vector3.up, slopeHit.normal);
+        }
+        else slopeangle = 0f;
+
+        if (sliding)
+        {
+            if(slopeangle < 10f) slideSpeed = Mathf.Lerp(slideSpeed, 0f, slideDeceleration * Time.deltaTime);
+        }
+        else speed = Mathf.Lerp(speed, _moveSpeed * _currentSpeedMult, _moveSpeedTransition * Time.deltaTime);
+
         Vector3 finalMove;
         if (sliding)
         {
             finalMove = _verticalVelocity + (slideSpeed * slideDirection);
+            if (slopeangle > 0f)
+            {
+                finalMove = Vector3.ProjectOnPlane(finalMove, slopeHit.normal) * (1f + (slopeangle / 90f));
+            }
+            
         }
         else finalMove = _verticalVelocity + (_move * speed);
 
@@ -334,10 +352,16 @@ public class FPSController : MonoBehaviour
                 if (hitinfo.collider.gameObject.TryGetComponent(out AmmoItem ammoitem))
                 {
                     Destroy(hitinfo.collider.gameObject);
+                    _audioSource.Stop();
+                    _audioSource.clip = _supplyPickupsound;
+                    _audioSource.Play();
                 }
                 else if(hitinfo.collider.gameObject.TryGetComponent(out Weapon weapon))
                 {
                     weapon._effectSpawner = _hitEffectSpawner;
+                    _audioSource.Stop();
+                    _audioSource.clip = _weaponPickupsound;
+                    _audioSource.Play();
                 }
             }
         }

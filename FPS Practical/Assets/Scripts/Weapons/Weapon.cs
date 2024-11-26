@@ -27,6 +27,7 @@ public abstract class Weapon : MonoBehaviour
     public abstract void PlayShootSound();
     public abstract void PlayReloadSound();
     public abstract void StopSounds();
+    public abstract void RefillAmmo();
     private void OnDrawGizmos()
     {
         //Gizmos.DrawSphere(transform.position + barrelPosition, 0.2f);
