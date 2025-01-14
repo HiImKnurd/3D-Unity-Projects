@@ -111,13 +111,15 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _pixels: 68.2
+    - _density: 100
+    - _pixels: 69.85
+    - _shellHeight: 0.28
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _tint: {r: 0.31709158, g: 1, b: 0.27735847, a: 1}
+    - _tint: {r: 0.054347992, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6772712138718094709
 MonoBehaviour:

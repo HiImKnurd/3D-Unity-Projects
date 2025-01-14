@@ -23724,7 +23724,8 @@ PrefabInstance:
       value: DroneTarget (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4209508722050737005, guid: 59fede8b18bd2134f8e2325a8fb7a63b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59fede8b18bd2134f8e2325a8fb7a63b, type: 3}

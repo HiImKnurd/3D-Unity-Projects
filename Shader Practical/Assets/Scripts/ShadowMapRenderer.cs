@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class ShadowMapRenderer : MonoBehaviour
     private LightSource _lightSource;
 
     [SerializeField]
-    private int _shadowMapResolution = 1024;
+    private int _shadowMapResolution = 2048;
 
     [SerializeField]
     private float _shadowBias = 0.005f;
@@ -18,13 +19,15 @@ public class ShadowMapRenderer : MonoBehaviour
     private Camera _lightCamera;
     private RenderTexture _shadowMap;
 
+    [SerializeField] Material[] material;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _lightSource = GetComponent<LightSource>();
 
-        if(_lightSource == null)
+        if (_lightSource == null)
         {
             Debug.Log("Shadowmapper requires a light source");
             return;
@@ -61,8 +64,8 @@ public class ShadowMapRenderer : MonoBehaviour
         _lightCamera.targetTexture = _shadowMap;
 
         _lightCamera.nearClipPlane = 0.1f;
-        _lightCamera.farClipPlane = 10f;
-        _lightCamera.orthographic = true;
+        _lightCamera.farClipPlane = 15f;
+        //_lightCamera.orthographic = true;
         _lightCamera.orthographicSize = 10;
 
         lightCameraObject.transform.SetParent(_lightSource.transform, false);
@@ -78,27 +81,29 @@ public class ShadowMapRenderer : MonoBehaviour
 
     private void SendShadowDataToShader()
     {
-        Material material = _lightSource.GetMaterial();
         if (material == null)
             return;
 
         // Calculate light's view-porjection matrix
         Matrix4x4 lightViewProjMatrix = _lightCamera.projectionMatrix * _lightCamera.worldToCameraMatrix;
 
-        // Sending shadow data
-        material.SetTexture("_shadowMap", _shadowMap);
-        material.SetFloat("_shadowBias", _shadowBias);
-        material.SetMatrix("_lightViewProj", lightViewProjMatrix);
+        foreach (Material _material in material)
+        {
+            // Sending shadow data
+            _material.SetTexture("_shadowMap", _shadowMap);
+            _material.SetFloat("_shadowBias", _shadowBias);
+            _material.SetMatrix("_lightViewProj", lightViewProjMatrix);
+        }
     }
 
     private void OnDestroy()
     {
-        if(_shadowMap != null)
+        if (_shadowMap != null)
         {
             _shadowMap.Release();
         }
 
-        if(_lightCamera != null)
+        if (_lightCamera != null)
         {
             Destroy(_lightCamera.gameObject);
         }
@@ -106,6 +111,6 @@ public class ShadowMapRenderer : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.DrawTexture(new Rect(10, 10, 512, 512), _shadowMap, ScaleMode.ScaleToFit, false);
+        //GUI.DrawTexture(new Rect(10, 10, 512, 512), _shadowMap, ScaleMode.ScaleToFit, false);
     }
 }

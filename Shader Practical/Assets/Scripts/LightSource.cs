@@ -14,49 +14,54 @@ public class LightSource : MonoBehaviour
         SPOT = 2,
     }
     [SerializeField] 
-    private Type _type;
+    public Type _type;
+    public Vector3 _position;
     [SerializeField]
-    private Vector3 _direction = new Vector3(0, -1, 0);
+    public Vector3 _direction = new Vector3(0, -1, 0);
     [SerializeField]
-    private Material _material;
+    public Material _material;
     [SerializeField]
-    private Color _color;
-    [SerializeField]
-    [Range(0f, 1f)]
-    private float _smoothness;
+    public Color _color;
     [SerializeField]
     [Range(0f, 1f)]
-    private float _specularStrength;
+    public float _smoothness;
+    [SerializeField]
+    [Range(0f, 1f)]
+    public float _specularStrength;
     [SerializeField]
     [Range(0f, 10f)]
-    private float intensity;
+    public float intensity;
     [SerializeField]
-    private Vector3 attentuation = new Vector3 (1.0f, 0.09f, 0.032f);
+    public Vector3 attentuation = new Vector3 (1.0f, 0.09f, 0.032f);
 
     [SerializeField]
     [Range(0f, 360f)]
-    private float _spotlightCutoff = 20f;
+    public float _spotlightCutoff = 20f;
+    [SerializeField]
+    [Range(0f, 360f)]
+    public float _spotlightInnerCutoff = 10f;
 
     [SerializeField]
-    private int _quantizationCount = 15;
+    public int _quantizationCount = 15;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _position = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        _position = transform.position;
         _direction = transform.rotation * new Vector3(0, -1, 0);
         _direction = _direction.normalized;
 
         SendToShader();
     }
-    private void SendToShader()
+    public void SendToShader()
     {
-        _material.SetVector("_lightPosition", transform.position);
+        _material.SetVector("_lightPosition", _position);
         _material.SetVector("_lightDirection", _direction);
         _material.SetVector("_lightColor", _color);
         _material.SetFloat("_smoothness", _smoothness);
@@ -78,7 +83,7 @@ public class LightSource : MonoBehaviour
         return _material;
     }
 
-    private void OnDrawGizmos()
+    public void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, 1);

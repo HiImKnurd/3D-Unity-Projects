@@ -36,12 +36,15 @@ Shader "Unlit/LightingShader"
                 float4 position: POSITION;
                 float2 uv : TEXCOORD0;
                 float3 normal : NORMAL;
+                float4 tangent : TANGENT;
             };
 
             struct vertex2Fragment {
                 float4 position : SV_POSITION;
                 float2 uv : TEXCOORD0;
                 float3 normal : NORMAL;
+                float3 tangent : TEXCOORD1;
+                float3 bitangent : TEXCOORD2;
                 float3 worldPosition : POSITION1;
                 float4 shadowCoord : POSITION2;
             };
@@ -90,6 +93,8 @@ Shader "Unlit/LightingShader"
                 v2f.worldPosition = mul(unity_ObjectToWorld, vd.position);
                 v2f.uv = TRANSFORM_TEX(vd.uv, _mainTexture);
                 v2f.normal = normalize(UnityObjectToWorldNormal(vd.normal));
+                v2f.tangent = normalize(UnityObjectToWorldDir(vd.tangent.xyz));
+                v2f.bitangent = cross(v2f.normal, v2f.tangent) * (vd.tangent.w * unity_WorldTransformParams.w);
 
                 v2f.shadowCoord = mul(_lightViewProj, float4(v2f.worldPosition, 1.0));
 
@@ -97,13 +102,17 @@ Shader "Unlit/LightingShader"
             }
 
             float4 MyFragmentShader(vertex2Fragment v2f) : SV_TARGET{
+            float4 output = float4(0,0,0, 0);
+            for(int i = 0;i < 2; i++){
                 float attenuation = 1.0f;
+                _lightPosition.x += i * 3;
+                if(i > 0) _lightDirection.x = -_lightDirection.x;
                // Directional light
                 float3 finalLightDirection;
                 if (_lightType == 0) finalLightDirection = _lightDirection;
                 // Point and Spot light
                 else {
-                    finalLightDirection = normalize(v2f.worldPosition - _lightPosition);
+                    finalLightDirection = normalize(v2f.worldPosition - (_lightPosition));
                     float distance = length(v2f.worldPosition - _lightPosition);
                     attenuation = 1.0 / (_attenuation.x + _attenuation.y * distance + _attenuation.z * distance * distance);
 
@@ -130,11 +139,12 @@ Shader "Unlit/LightingShader"
                 float3 diffuse = albedo.rgb * _lightColor.rgb * saturate(dot(v2f.normal, -finalLightDirection));
                 float3 final = (diffuse + specularColor) * _lightIntensity * attenuation * shadowFactor;
 
-                float4 output = float4(final, 0);
+                output += float4(final, 0);
                 output.r = floor((_quantizationCount - 1.0) * output.r + 0.5) / (_quantizationCount - 1.0f);
                 output.g = floor((_quantizationCount - 1.0) * output.g + 0.5) / (_quantizationCount - 1.0f);
                 output.b = floor((_quantizationCount - 1.0) * output.b + 1.0) / (_quantizationCount - 1.0f);
                 output.a = albedo.a;
+                }
                 return output;
             }
 
