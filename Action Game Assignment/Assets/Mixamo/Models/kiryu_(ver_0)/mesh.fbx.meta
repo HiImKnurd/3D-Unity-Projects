@@ -16,8 +16,7 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: "Avatar creation failed:\n\tTransform 'kou_r_n' is not an ancestor
-      of 'oya1_r_n'\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -227,7 +226,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: kou_r_n
+    - boneName: ude3_r_n
       humanName: RightHand
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -574,8 +573,8 @@ ModelImporter:
       scale: {x: 100, y: 100, z: 100}
     - name: center_c_n
       parentName: c_at_kiryu_armature
-      position: {x: -0, y: 0, z: 0.011399999}
-      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+      position: {x: 0, y: 0, z: 0.011289495}
+      rotation: {x: -0.00000010536713, y: -0.70710665, z: -0.7071069, w: -0.00000010536713}
       scale: {x: 1, y: 1, z: 1}
     - name: ketu_c_n
       parentName: center_c_n
@@ -785,7 +784,7 @@ ModelImporter:
     - name: ude3_l_n
       parentName: ude2_l_n
       position: {x: -6.938894e-18, y: 0.0028799998, z: -5.7483705e-12}
-      rotation: {x: 0.34445438, y: 0.3444543, z: -0.25022787, w: 0.8367129}
+      rotation: {x: 0.28361043, y: 0.32563752, z: -0.27426797, w: 0.8592453}
       scale: {x: 1, y: 1, z: 0.99999994}
     - name: buki_l_n
       parentName: ude3_l_n
@@ -797,6 +796,26 @@ ModelImporter:
       position: {x: -0, y: 0.0000010001659, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
+    - name: hito1_l_n
+      parentName: ude3_l_n
+      position: {x: -0.00064902066, y: 0.00050444604, z: -0.00077533}
+      rotation: {x: -0.37101355, y: -0.15973507, z: 0.58488977, w: 0.7033759}
+      scale: {x: 0.9999998, y: 0.9999999, z: 0.9999999}
+    - name: hito2_l_n
+      parentName: hito1_l_n
+      position: {x: 1.834378e-11, y: 0.00045734431, z: 0.0000000014277082}
+      rotation: {x: 0.000000074505834, y: -0.0000000074505815, z: -0.000000044703498, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hito3_l_n
+      parentName: hito2_l_n
+      position: {x: -8.895662e-17, y: 0.0002623346, z: 0.0000000012328543}
+      rotation: {x: 0.002761801, y: 0.7075308, z: 0.0036350423, w: 0.7066678}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hito3_l_n_end
+      parentName: hito3_l_n
+      position: {x: -0, y: 0.0000010001659, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     - name: kou_l_n
       parentName: ude3_l_n
       position: {x: 3.352761e-10, y: 0.00022087205, z: 5.9604643e-10}
@@ -805,17 +824,17 @@ ModelImporter:
     - name: koyu1_l_n
       parentName: kou_l_n
       position: {x: -1.4901161e-10, y: 0.0008285613, z: -6.61239e-10}
-      rotation: {x: -0.09944452, y: -0.11231252, z: 0.11273297, w: 0.98223627}
+      rotation: {x: 0.03761473, y: -0.092860095, z: 0.1508807, w: 0.98346186}
       scale: {x: 0.9999999, y: 1, z: 0.99999994}
     - name: koyu2_l_n
       parentName: koyu1_l_n
       position: {x: -6.519258e-11, y: 0.0004005564, z: 0.0000000010523945}
-      rotation: {x: 0.060291238, y: 0.06029122, z: -0.003648331, w: 0.99635166}
+      rotation: {x: 0.04052232, y: 0.060351744, z: -0.0024516494, w: 0.9973513}
       scale: {x: 1, y: 1, z: 1}
     - name: koyu3_l_n
       parentName: koyu2_l_n
       position: {x: -3.4567578e-11, y: 0.00017862409, z: 2.1504287e-10}
-      rotation: {x: 0.49999997, y: 0.50000006, z: 0.50000006, w: 0.49999994}
+      rotation: {x: 0.0036608498, y: 0.70676774, z: 0.0029915678, w: 0.70742995}
       scale: {x: 1, y: 1, z: 1}
     - name: koyu3_l_n_end
       parentName: koyu3_l_n
@@ -825,7 +844,7 @@ ModelImporter:
     - name: kusu1_l_n
       parentName: kou_l_n
       position: {x: -0.00022976629, y: 0.0008542691, z: 0.00006196536}
-      rotation: {x: -0.06382529, y: -0.068151824, z: 0.109864235, w: 0.9895512}
+      rotation: {x: 0.031530477, y: -0.055008188, z: 0.14690429, w: 0.9871166}
       scale: {x: 1, y: 0.9999999, z: 1}
     - name: kusu2_l_n
       parentName: kusu1_l_n
@@ -835,17 +854,37 @@ ModelImporter:
     - name: kusu3_l_n
       parentName: kusu2_l_n
       position: {x: -1.0599599e-10, y: 0.00023639995, z: 0.0000000013288722}
-      rotation: {x: 0.5, y: 0.5, z: 0.50000006, w: 0.49999994}
+      rotation: {x: 0.0027245423, y: 0.70750654, z: 0.003547093, w: 0.70669264}
       scale: {x: 1, y: 0.99999994, z: 1}
     - name: kusu3_l_n_end
       parentName: kusu3_l_n
       position: {x: -0, y: 0.0000010001659, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
+    - name: naka1_l_n
+      parentName: ude3_l_n
+      position: {x: -0.0005259251, y: 0.00071967486, z: -0.00067347713}
+      rotation: {x: -0.2783247, y: -0.3470797, z: 0.32053667, w: 0.836258}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: naka2_l_n
+      parentName: naka1_l_n
+      position: {x: 2.7939677e-11, y: 0.00053682015, z: 0.0000000013643875}
+      rotation: {x: 0.041325975, y: 0.044994313, z: -0.0018628011, w: 0.9981304}
+      scale: {x: 1, y: 0.9999999, z: 1}
+    - name: naka3_l_n
+      parentName: naka2_l_n
+      position: {x: 4.23375e-11, y: 0.00029133365, z: 0.0000000011662236}
+      rotation: {x: 0.0025807705, y: 0.70695275, z: 0.0022778506, w: 0.70725244}
+      scale: {x: 1, y: 1, z: 1}
+    - name: naka3_l_n_end
+      parentName: naka3_l_n
+      position: {x: -0, y: 0.0000010001659, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     - name: oya1_l_n
-      parentName: kou_l_n
-      position: {x: -0.0004265107, y: -0.00016068469, z: -0.00016700836}
-      rotation: {x: -0.21261567, y: -0.22301343, z: 0.40428016, w: 0.86117196}
+      parentName: ude3_l_n
+      position: {x: -0.00018554341, y: -0.0001687544, z: -0.000222237}
+      rotation: {x: -0.24265665, y: -0.39749756, z: 0.39898998, w: 0.7898864}
       scale: {x: 1, y: 1, z: 1}
     - name: oya2_l_n
       parentName: oya1_l_n
@@ -855,50 +894,10 @@ ModelImporter:
     - name: oya3_l_n
       parentName: oya2_l_n
       position: {x: 6.891787e-10, y: 0.00034933444, z: -0.0000000010849908}
-      rotation: {x: 0.78914857, y: 0.30618724, z: 0.30618733, w: 0.43559527}
+      rotation: {x: -0.000051975203, y: 0.5755819, z: 0.00040778972, w: 0.817744}
       scale: {x: 1, y: 1, z: 1.0000001}
     - name: oya3_l_n_end
       parentName: oya3_l_n
-      position: {x: -0, y: 0.0000010001659, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: hito1_l_n
-      parentName: kou_l_n
-      position: {x: -0.0007325661, y: 0.0007501873, z: 0.000057841215}
-      rotation: {x: -0.046248484, y: -0.0462485, z: 0.10951398, w: 0.99183106}
-      scale: {x: 1, y: 1, z: 1}
-    - name: hito2_l_n
-      parentName: hito1_l_n
-      position: {x: 1.834378e-11, y: 0.00045734431, z: 0.0000000014277082}
-      rotation: {x: 0.000000074505834, y: -0.0000000074505815, z: -0.000000044703498, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: hito3_l_n
-      parentName: hito2_l_n
-      position: {x: -8.895662e-17, y: 0.0002623346, z: 0.0000000012328543}
-      rotation: {x: 0.49999994, y: 0.50000006, z: 0.5, w: 0.49999997}
-      scale: {x: 1, y: 1, z: 1}
-    - name: hito3_l_n_end
-      parentName: hito3_l_n
-      position: {x: -0, y: 0.0000010001659, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: naka1_l_n
-      parentName: ude3_l_n
-      position: {x: -0.0005259251, y: 0.00071967486, z: -0.00067347713}
-      rotation: {x: -0.37083867, y: -0.39195564, z: 0.25141716, w: 0.80351657}
-      scale: {x: 0.99999994, y: 1, z: 0.99999994}
-    - name: naka2_l_n
-      parentName: naka1_l_n
-      position: {x: 2.7939677e-11, y: 0.00053682015, z: 0.0000000013643875}
-      rotation: {x: 0.044987164, y: 0.044987123, z: -0.0020279116, w: 0.9979721}
-      scale: {x: 1, y: 0.9999999, z: 1}
-    - name: naka3_l_n
-      parentName: naka2_l_n
-      position: {x: 4.23375e-11, y: 0.00029133365, z: 0.0000000011662236}
-      rotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.49999997}
-      scale: {x: 1, y: 1, z: 1}
-    - name: naka3_l_n_end
-      parentName: naka3_l_n
       position: {x: -0, y: 0.0000010001659, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -965,7 +964,7 @@ ModelImporter:
     - name: ude3_r_n
       parentName: ude2_r_n
       position: {x: 6.938894e-18, y: 0.0028799998, z: -5.7483705e-12}
-      rotation: {x: 0.34445438, y: -0.3444543, z: 0.25022787, w: 0.8367129}
+      rotation: {x: 0.31357154, y: -0.3350564, z: 0.2626784, w: 0.8487698}
       scale: {x: 1, y: 1, z: 0.99999994}
     - name: buki_r_n
       parentName: ude3_r_n
@@ -977,6 +976,26 @@ ModelImporter:
       position: {x: -0, y: 0.0000010001659, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
+    - name: hito1_r_n
+      parentName: ude3_r_n
+      position: {x: 0.00064902066, y: 0.00050444604, z: -0.00077533}
+      rotation: {x: -0.29944393, y: 0.3401816, z: -0.24754362, w: 0.85634804}
+      scale: {x: 0.9999998, y: 0.9999999, z: 0.9999999}
+    - name: hito2_r_n
+      parentName: hito1_r_n
+      position: {x: -1.834378e-11, y: 0.00045734431, z: 0.0000000014277082}
+      rotation: {x: 0.000000074505834, y: 0.0000000074505815, z: 0.000000044703498, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hito3_r_n
+      parentName: hito2_r_n
+      position: {x: 8.895662e-17, y: 0.0002623346, z: 0.0000000012328543}
+      rotation: {x: -0.0031617638, y: 0.70693, z: 0.0028176103, w: -0.70727086}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hito3_r_n_end
+      parentName: hito3_r_n
+      position: {x: -0, y: 0.0000010001659, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     - name: kou_r_n
       parentName: ude3_r_n
       position: {x: -3.352761e-10, y: 0.00022087205, z: 5.9604643e-10}
@@ -985,17 +1004,17 @@ ModelImporter:
     - name: koyu1_r_n
       parentName: kou_r_n
       position: {x: 1.4901161e-10, y: 0.0008285613, z: -6.61239e-10}
-      rotation: {x: -0.09944452, y: 0.11231252, z: -0.11273297, w: 0.98223627}
+      rotation: {x: 0.0030289441, y: 0.105021894, z: -0.07885245, w: 0.99133426}
       scale: {x: 0.9999999, y: 1, z: 0.99999994}
     - name: koyu2_r_n
       parentName: koyu1_r_n
       position: {x: 6.519258e-11, y: 0.0004005564, z: 0.0000000010523945}
-      rotation: {x: 0.060291238, y: -0.06029122, z: 0.003648331, w: 0.99635166}
+      rotation: {x: 0.040529303, y: -0.06035175, z: 0.0024526387, w: 0.997351}
       scale: {x: 1, y: 1, z: 1}
     - name: koyu3_r_n
       parentName: koyu2_r_n
       position: {x: 3.4567578e-11, y: 0.00017862409, z: 2.1504287e-10}
-      rotation: {x: -0.49999997, y: 0.50000006, z: 0.50000006, w: -0.49999994}
+      rotation: {x: -0.0036670207, y: 0.7067201, z: 0.0029042324, w: -0.70747787}
       scale: {x: 1, y: 1, z: 1}
     - name: koyu3_r_n_end
       parentName: koyu3_r_n
@@ -1005,7 +1024,7 @@ ModelImporter:
     - name: kusu1_r_n
       parentName: kou_r_n
       position: {x: 0.00022976629, y: 0.0008542691, z: 0.00006196536}
-      rotation: {x: -0.06382529, y: 0.068151824, z: -0.109864235, w: 0.9895512}
+      rotation: {x: -0.00007270276, y: 0.06295701, z: -0.085766196, w: 0.9943242}
       scale: {x: 1, y: 0.9999999, z: 1}
     - name: kusu2_r_n
       parentName: kusu1_r_n
@@ -1015,50 +1034,10 @@ ModelImporter:
     - name: kusu3_r_n
       parentName: kusu2_r_n
       position: {x: 1.0599599e-10, y: 0.00023639995, z: 0.0000000013288722}
-      rotation: {x: -0.5, y: 0.5, z: 0.50000006, w: -0.49999994}
+      rotation: {x: -0.0030941782, y: 0.70729107, z: 0.0034821662, w: -0.7069072}
       scale: {x: 1, y: 0.99999994, z: 1}
     - name: kusu3_r_n_end
       parentName: kusu3_r_n
-      position: {x: -0, y: 0.0000010001659, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: oya1_r_n
-      parentName: kou_r_n
-      position: {x: 0.0004265107, y: -0.00016068469, z: -0.00016700836}
-      rotation: {x: -0.21261567, y: 0.22301343, z: -0.40428016, w: 0.86117196}
-      scale: {x: 1, y: 1, z: 1}
-    - name: oya2_r_n
-      parentName: oya1_r_n
-      position: {x: -5.576294e-10, y: 0.0007181427, z: -8.475035e-10}
-      rotation: {x: -0.0000002719462, y: -0.00000038370484, z: 0.0000017322599, w: 1}
-      scale: {x: 1.0000001, y: 1, z: 1.0000001}
-    - name: oya3_r_n
-      parentName: oya2_r_n
-      position: {x: -6.891787e-10, y: 0.00034933444, z: -0.0000000010849908}
-      rotation: {x: 0.78914857, y: -0.30618724, z: -0.30618733, w: 0.43559527}
-      scale: {x: 1, y: 1, z: 1.0000001}
-    - name: oya3_r_n_end
-      parentName: oya3_r_n
-      position: {x: -0, y: 0.0000010001659, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: hito1_r_n
-      parentName: kou_r_n
-      position: {x: 0.0007325661, y: 0.0007501873, z: 0.000057841215}
-      rotation: {x: -0.046248484, y: 0.0462485, z: -0.10951398, w: 0.99183106}
-      scale: {x: 1, y: 1, z: 1}
-    - name: hito2_r_n
-      parentName: hito1_r_n
-      position: {x: -1.834378e-11, y: 0.00045734431, z: 0.0000000014277082}
-      rotation: {x: 0.000000074505834, y: 0.0000000074505815, z: 0.000000044703498, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: hito3_r_n
-      parentName: hito2_r_n
-      position: {x: 8.895662e-17, y: 0.0002623346, z: 0.0000000012328543}
-      rotation: {x: -0.49999994, y: 0.50000006, z: 0.5, w: -0.49999997}
-      scale: {x: 1, y: 1, z: 1}
-    - name: hito3_r_n_end
-      parentName: hito3_r_n
       position: {x: -0, y: 0.0000010001659, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -1079,6 +1058,26 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: naka3_r_n_end
       parentName: naka3_r_n
+      position: {x: -0, y: 0.0000010001659, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: oya1_r_n
+      parentName: ude3_r_n
+      position: {x: 0.00018555195, y: -0.00016874979, z: -0.00022223059}
+      rotation: {x: -0.36421725, y: 0.28304943, z: -0.558516, w: 0.6894118}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: oya2_r_n
+      parentName: oya1_r_n
+      position: {x: -5.576294e-10, y: 0.0007181427, z: -8.475035e-10}
+      rotation: {x: -0.0000002719462, y: -0.00000038370484, z: 0.0000017322599, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: oya3_r_n
+      parentName: oya2_r_n
+      position: {x: -6.891787e-10, y: 0.00034933444, z: -0.0000000010849908}
+      rotation: {x: -0.00032210103, y: -0.5745045, z: 0.0005909297, w: 0.8185012}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: oya3_r_n_end
+      parentName: oya3_r_n
       position: {x: -0, y: 0.0000010001659, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
