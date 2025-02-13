@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -502,7 +502,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -638,7 +638,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -743,7 +743,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1338,6 +1338,8 @@ MonoBehaviour:
   _characterController: {fileID: 1774868772804785438}
   _playerInput: {fileID: 4947599919780513298}
   _camera: {fileID: 0}
+  _freecamera: {fileID: 0}
+  _impulseSource: {fileID: 0}
   _target: {fileID: 0}
   _attackHandler: {fileID: 3810042550385966401}
   _isPlayer: 1
@@ -1355,12 +1357,14 @@ MonoBehaviour:
   _dashSpeed: 15
   _dashTimer: 0.25
   _dashCD: 0.75
+  _enemyHealthbar: {fileID: 0}
   _health: 0
   _maxHealth: 100
   _stun: 0
   _knockback: {x: 0, y: 0, z: 0}
   _isInHitstun: 0
   _isKnockedDown: 0
+  _isDead: 0
   _comboHandler: {fileID: 3207911600815719226}
   _attackType: 0
   _attackStep: 0
@@ -1568,6 +1572,7 @@ MonoBehaviour:
   _playerController: {fileID: 1809330419496724238}
   selfHurtbox: {fileID: 7770172628513484588}
   _audioSource: {fileID: 3717824628120932807}
+  _hitEffect: {fileID: 0}
 --- !u!143 &1774868772804785438
 CharacterController:
   m_ObjectHideFlags: 0
