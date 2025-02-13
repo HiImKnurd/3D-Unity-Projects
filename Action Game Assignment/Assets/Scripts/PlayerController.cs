@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CinemachineImpulseSource _impulseSource;
     [SerializeField] public Transform _target;
     [SerializeField] AttackHandler _attackHandler;
+    [SerializeField] PPManager _effects;
     private InputActionAsset _inputActions;
     private InputController _inputs;
     private CinemachineVirtualCamera _activeCamera;
@@ -562,6 +563,7 @@ public class PlayerController : MonoBehaviour
             PlaySFX(_parrySFX);
             var parryEffect = Instantiate(_parryEffect, this.gameObject.transform);
             parryEffect.transform.position = _shield.transform.position;
+            _effects.StartHitstop(0.2f, true);
             return;
         }
         _isInHitstun = true;
@@ -583,7 +585,11 @@ public class PlayerController : MonoBehaviour
                 _isGrounded = false;
                 _animator.SetBool("IsAirborne", true);
             }
-            if(_knockback.magnitude > 5) _impulseSource.GenerateImpulse(Camera.main.transform.forward);
+            if (_knockback.magnitude > 5)
+            {
+                _impulseSource.GenerateImpulse(Camera.main.transform.forward);
+                _effects.StartHitstop(0.2f, true);
+            }
             _animator.SetBool("IsHitThisFrame", true);
             _hitAnimCD = 0.1f;
             _animator.SetBool("InHitstun", true);

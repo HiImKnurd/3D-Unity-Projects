@@ -15,22 +15,22 @@ MonoBehaviour:
   active: 0
   blurIntensity1:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   blurIntensity2:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   threshhold:
     m_OverrideState: 1
-    m_Value: 0.14
+    m_Value: 0.25
   tau:
     m_OverrideState: 1
-    m_Value: 3.65
+    m_Value: 3.95
   phi:
     m_OverrideState: 1
-    m_Value: 20
+    m_Value: 70
   invert:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   hyperbolic:
     m_OverrideState: 1
     m_Value: 1
@@ -46,57 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff81ade5397ccd543afbad3fc905ed85, type: 3}
   m_Name: GaussianPostProcess
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   blurIntensity:
     m_OverrideState: 1
-    m_Value: 0
---- !u!114 &-2375010928033616117
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
-  m_Name: Bloom
-  m_EditorClassIdentifier: 
-  active: 0
-  skipIterations:
-    m_OverrideState: 1
-    m_Value: 1
-  threshold:
-    m_OverrideState: 1
-    m_Value: 0.87
-  intensity:
-    m_OverrideState: 1
-    m_Value: 1
-  scatter:
-    m_OverrideState: 1
-    m_Value: 0.7
-  clamp:
-    m_OverrideState: 1
-    m_Value: 65472
-  tint:
-    m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
-  highQualityFiltering:
-    m_OverrideState: 1
-    m_Value: 0
-  downscale:
-    m_OverrideState: 0
-    m_Value: 0
-  maxIterations:
-    m_OverrideState: 0
-    m_Value: 6
-  dirtTexture:
-    m_OverrideState: 1
-    m_Value: {fileID: 0}
-    dimension: 1
-  dirtIntensity:
-    m_OverrideState: 1
-    m_Value: 0
+    m_Value: 9
 --- !u!114 &-2111192507987187820
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -151,7 +104,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: -2111192507987187820}
-  - {fileID: -2375010928033616117}
   - {fileID: 4165522248915801265}
   - {fileID: -2673260970022080356}
   - {fileID: 8734136784914076003}
@@ -187,4 +139,16 @@ MonoBehaviour:
   active: 1
   pixelSize:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 2.5
+  bayerLevel:
+    m_OverrideState: 1
+    m_Value: 0
+  redColourCount:
+    m_OverrideState: 1
+    m_Value: 30
+  greenColourCount:
+    m_OverrideState: 1
+    m_Value: 30
+  blueColourCount:
+    m_OverrideState: 1
+    m_Value: 10

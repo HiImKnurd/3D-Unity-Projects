@@ -5,15 +5,27 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-[Serializable, VolumeComponentMenuForRenderPipeline("Custom/Pixelization"
+[Serializable, VolumeComponentMenuForRenderPipeline("Custom/Retro"
     , typeof(UniversalRenderPipeline))]
 public class RetroPostProcess : VolumeComponent, IPostProcessComponent
 {
+    [Header("Pixelization")]
     [Tooltip("Affects the pixel count")]
     public FloatParameter pixelSize = new ClampedFloatParameter(0f, 0f, 20f);
+    [Tooltip("Dithering level")]
+    public IntParameter bayerLevel = new ClampedIntParameter(2, 0, 2);
+    [Header("Posterization")]
+    public IntParameter redColourCount = new ClampedIntParameter(25, 0, 256);
+    public IntParameter greenColourCount = new ClampedIntParameter(25, 0, 256);
+    public IntParameter blueColourCount = new ClampedIntParameter(25, 0, 256);
+
     public bool IsActive()
     {
-        return (pixelSize.value > 0) && active;
+        return ((pixelSize.value > 0) || 
+            redColourCount.value > 0 ||
+            greenColourCount.value > 0 ||
+            blueColourCount.value > 0) 
+            && active;
     }
 
     public bool IsTileCompatible() => true;

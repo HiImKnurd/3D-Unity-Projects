@@ -37,16 +37,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _ShadowTexture:
-        m_Texture: {fileID: 2800000, guid: 231008b4993380a47b3ee208791856ff, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2643742687e0f504d8e480842b7949d1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Max_Brightness: 0.6
+    - _Max_Brightness: 1.5
     - _Min_Brightness: 0
     - _QueueControl: 0
-    - _Shades: 0.42
+    - _Shades: 0.2
     - _ShadowStep: 0.1
     m_Colors:
+    - _Main_Color: {r: 0.6754716, g: 0.6754716, b: 0.6754716, a: 0}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
     - _ShadowPatternColor: {r: 0.13962269, g: 0.13962269, b: 0.13962269, a: 0}
+    - _ShadowTiling: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []

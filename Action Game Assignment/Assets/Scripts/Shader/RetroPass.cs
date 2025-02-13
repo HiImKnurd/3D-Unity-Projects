@@ -37,6 +37,10 @@ public class RetroPass : ScriptableRenderPass
 
         // Set the parameters in the material 
         _material.SetFloat("_pixelSize", (float)retroPostProcess.pixelSize);
+        _material.SetInteger("_redCount", retroPostProcess.redColourCount.value);
+        _material.SetInteger("_greenCount", retroPostProcess.greenColourCount.value);
+        _material.SetInteger("_blueCount", retroPostProcess.blueColourCount.value);
+        _material.SetInteger("_bayerLevel", retroPostProcess.bayerLevel.value);
         // Apply the black and white effect to the temporary render target
         Blit(commandBuffer, src, dst, _material, 0);
         //Blit the result back to the source render target
