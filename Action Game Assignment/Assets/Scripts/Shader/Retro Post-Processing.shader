@@ -1,4 +1,4 @@
-Shader "Custom Post-Processing/Pixelization"
+Shader "Custom Post-Processing/Retro"
 {
     Properties
     {
@@ -24,6 +24,8 @@ Shader "Custom Post-Processing/Pixelization"
             uniform sampler2D _MainTex;
             float4 _MainTex_ST;
             uniform float _pixelSize;
+
+
 
             struct appdata
             {
@@ -57,7 +59,6 @@ Shader "Custom Post-Processing/Pixelization"
 
                 float4 result = tex2D(_MainTex, UV); // Color sampler
 
-                
                 return result;
             }
             ENDHLSL

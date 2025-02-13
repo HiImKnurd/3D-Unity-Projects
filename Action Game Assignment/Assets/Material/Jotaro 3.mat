@@ -21,10 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Jotaro 3
-  m_Shader: {fileID: -6465566751694194690, guid: e264b33334c60c246869fa8a7021ba6f,
-    type: 3}
-  m_Parent: {fileID: -876546973899608171, guid: e264b33334c60c246869fa8a7021ba6f,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: e264b33334c60c246869fa8a7021ba6f, type: 3}
+  m_Parent: {fileID: -876546973899608171, guid: e264b33334c60c246869fa8a7021ba6f, type: 3}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -39,7 +37,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Main_Texture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 6976a7a6c95720c428c8d3c45a04964b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowTexture:
@@ -49,12 +47,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _Max_Brightness: 1.33
-    - _Min_Brightness: 0.1
+    - _Min_Brightness: 0.03
     - _QueueControl: 0
-    - _Shades: 0.49
-    - _ShadowStep: 0.1
+    - _Shades: 0.47
+    - _ShadowStep: 0
     m_Colors:
-    - _ShadowColor: {r: 0.5028866, g: 0.5028866, b: 0.5028866, a: 0}
+    - _ShadowColor: {r: 0.004024717, g: 0.009721218, b: 0.084376216, a: 0}
     - _ShadowPatternColor: {r: 0, g: 0, b: 0, a: 0}
-    - _ShadowTiling: {r: 5, g: 1, b: 0, a: 0}
+    - _ShadowTiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

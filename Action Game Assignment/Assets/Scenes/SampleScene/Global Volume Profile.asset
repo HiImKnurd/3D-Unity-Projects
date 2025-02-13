@@ -1,5 +1,39 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5706484861191089306
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea5d02609f32404db222aecdcf00f0b, type: 3}
+  m_Name: DoGPostProcess
+  m_EditorClassIdentifier: 
+  active: 0
+  blurIntensity1:
+    m_OverrideState: 1
+    m_Value: 1
+  blurIntensity2:
+    m_OverrideState: 1
+    m_Value: 1
+  threshhold:
+    m_OverrideState: 1
+    m_Value: 0.14
+  tau:
+    m_OverrideState: 1
+    m_Value: 3.65
+  phi:
+    m_OverrideState: 1
+    m_Value: 20
+  invert:
+    m_OverrideState: 1
+    m_Value: 1
+  hyperbolic:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-2673260970022080356
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -34,10 +68,10 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.66
+    m_Value: 0.87
   intensity:
     m_OverrideState: 1
-    m_Value: 0.84
+    m_Value: 1
   scatter:
     m_OverrideState: 1
     m_Value: 0.7
@@ -121,6 +155,7 @@ MonoBehaviour:
   - {fileID: 4165522248915801265}
   - {fileID: -2673260970022080356}
   - {fileID: 8734136784914076003}
+  - {fileID: -5706484861191089306}
 --- !u!114 &4165522248915801265
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -152,4 +187,4 @@ MonoBehaviour:
   active: 1
   pixelSize:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 2

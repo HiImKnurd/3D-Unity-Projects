@@ -5,23 +5,23 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class PixelPass : ScriptableRenderPass
+public class RetroPass : ScriptableRenderPass
 {
     private Material _material;
-    private PixelPostProcess pixelPostProcess;
+    private RetroPostProcess retroPostProcess;
     int tempid = Shader.PropertyToID("_MainTex"); // Property ID for temporary render target
     RenderTargetIdentifier src, dst;
 
-    public PixelPass()
+    public RetroPass()
     {
         if (!_material) _material = CoreUtils.CreateEngineMaterial(
-            "Custom Post-Processing/Pixelization");
+            "Custom Post-Processing/Retro");
 
         renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
     }
     public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
     {
-        pixelPostProcess = VolumeManager.instance.stack.GetComponent<PixelPostProcess>();
+        retroPostProcess = VolumeManager.instance.stack.GetComponent<RetroPostProcess>();
         RenderTextureDescriptor desc = renderingData.cameraData.cameraTargetDescriptor;
         tempid = Shader.PropertyToID("_MainTex");
         cmd.GetTemporaryRT(tempid, desc);
@@ -31,12 +31,12 @@ public class PixelPass : ScriptableRenderPass
 
     public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
     {
-        if (pixelPostProcess == null || !pixelPostProcess.IsActive()) return;
+        if (retroPostProcess == null || !retroPostProcess.IsActive()) return;
 
-        CommandBuffer commandBuffer = CommandBufferPool.Get("PixelRenderPassFeature");
+        CommandBuffer commandBuffer = CommandBufferPool.Get("Custom/Retro");
 
         // Set the parameters in the material 
-        _material.SetFloat("_pixelSize", (float)pixelPostProcess.pixelSize);
+        _material.SetFloat("_pixelSize", (float)retroPostProcess.pixelSize);
         // Apply the black and white effect to the temporary render target
         Blit(commandBuffer, src, dst, _material, 0);
         //Blit the result back to the source render target

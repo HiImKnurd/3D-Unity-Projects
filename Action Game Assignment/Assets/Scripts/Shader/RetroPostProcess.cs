@@ -7,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 
 [Serializable, VolumeComponentMenuForRenderPipeline("Custom/Pixelization"
     , typeof(UniversalRenderPipeline))]
-public class PixelPostProcess : VolumeComponent, IPostProcessComponent
+public class RetroPostProcess : VolumeComponent, IPostProcessComponent
 {
     [Tooltip("Affects the pixel count")]
     public FloatParameter pixelSize = new ClampedFloatParameter(0f, 0f, 20f);

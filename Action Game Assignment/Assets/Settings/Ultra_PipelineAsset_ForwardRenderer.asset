@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: RenderObjects
+  m_Name: Render Outlines
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    passTag: RenderObjects
+    passTag: Render Outlines
     Event: 450
     filterSettings:
       RenderQueueType: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b5f8374dba85d1488cfeb63c630b511, type: 3}
-  m_Name: PixelRenderPassFeature
+  m_Name: Retro
   m_EditorClassIdentifier: 
   m_Active: 1
 --- !u!114 &-239256137458879559
@@ -81,6 +81,19 @@ MonoBehaviour:
   m_Name: BWRenderPassFeature
   m_EditorClassIdentifier: 
   m_Active: 1
+--- !u!114 &-124738672626933554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd6dc2bc1be3c148b083112748df874, type: 3}
+  m_Name: Difference of Gaussians
+  m_EditorClassIdentifier: 
+  m_Active: 1
 --- !u!114 &-54692405428087544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,11 +104,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: RenderObjects
+  m_Name: Render Outlined Objects
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    passTag: RenderObjects
+    passTag: Render Outlined Objects
     Event: 300
     filterSettings:
       RenderQueueType: 0
@@ -144,7 +157,8 @@ MonoBehaviour:
   - {fileID: -6679776550296465685}
   - {fileID: -239256137458879559}
   - {fileID: -5987509246198239720}
-  m_RendererFeatureMap: 2121872405081aa108158c0a8cb13dffeb4e98549eaa4ca3b9736e84cffdadfc18aefc521018e8ac
+  - {fileID: -124738672626933554}
+  m_RendererFeatureMap: 2121872405081aa108158c0a8cb13dffeb4e98549eaa4ca3b9736e84cffdadfc18aefc521018e8acce605190d6d644fe
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}

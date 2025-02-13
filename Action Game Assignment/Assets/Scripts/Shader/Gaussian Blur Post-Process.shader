@@ -16,11 +16,16 @@ Shader "Custom Post-Processing/Gaussian Blur"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
         #define E 2.71828f
 
-        // Declare Properties
+        // Declare Properties for Blur
         sampler2D _MainTex;
         float4 _MainTex_TexelSize;
         uint _GridSize;
         float _Spread;
+
+        //Properties for Difference of Gaussians
+        float _threshhold, _tau, _phi;
+        sampler2D _SecondTex;
+        int _invert, _hyperbolic;
 
         // Gaussian function
         float gaussian(int x)
@@ -112,13 +117,28 @@ Shader "Custom Post-Processing/Gaussian Blur"
             ENDHLSL
         }
 
-        //Pass{
+        Pass{
+            Name "Difference of Gaussians"
 
-        //    HLSLPROGRAM
-        //    #pragma vertex vert
-        //    #pragma fragment frag
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
 
-        //    float4
-        //}
+            float4 frag(v2f i) : SV_Target 
+            {
+                float2 G = tex2D(_SecondTex, i.uv).rg;
+
+                float4 diff = ((1+_tau) * G.r) - (_tau * G.g);
+
+                if (_hyperbolic) diff = diff >= _threshhold ? 1 : 1 + tanh(_phi * (diff - _threshhold));
+                else diff = diff >= _threshhold ? 1 : 0;
+
+                if(_invert) diff = 1 - diff;
+
+                return diff;
+            }
+
+            ENDHLSL
+        }
     }
 }

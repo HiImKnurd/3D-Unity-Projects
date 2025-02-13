@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class PixelRenderPassFeature : ScriptableRendererFeature
+public class RetroRenderPassFeature : ScriptableRendererFeature
 {
-    private PixelPass pixelPass;
+    private RetroPass retroPass;
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        renderer.EnqueuePass(pixelPass);
+        renderer.EnqueuePass(retroPass);
     }
 
     public override void Create()
     {
-        pixelPass = new PixelPass();
-        //name = "Pixelization";
+        retroPass = new RetroPass();
+        name = "Retro";
     }
 
     // Start is called before the first frame update

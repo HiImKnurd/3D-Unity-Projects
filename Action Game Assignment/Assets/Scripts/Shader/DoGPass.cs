@@ -9,20 +9,20 @@ public class DoGPass : ScriptableRenderPass
 {
     private Material _material;
     //private Material _mat1, _mat2;
-    private DoGPostProcess dogPostProcess;
+    private DifferenceOfGaussiansPostProcess dogPostProcess;
     int tempid = Shader.PropertyToID("_MainTex"); // Property ID for temporary render target
     RenderTargetIdentifier src, dst;
 
     public DoGPass()
     {
         if (!_material) _material = CoreUtils.CreateEngineMaterial(
-            "Custom Post-Processing/Difference of Gaussians");
+            "Custom Post-Processing/Gaussian Blur");
 
         renderPassEvent = RenderPassEvent.BeforeRenderingPostProcessing;
     }
     public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
     {
-        dogPostProcess = VolumeManager.instance.stack.GetComponent<DoGPostProcess>();
+        dogPostProcess = VolumeManager.instance.stack.GetComponent<DifferenceOfGaussiansPostProcess>();
         RenderTextureDescriptor desc = renderingData.cameraData.cameraTargetDescriptor;
         tempid = Shader.PropertyToID("_MainTex");
         cmd.GetTemporaryRT(tempid, desc);
@@ -36,19 +36,29 @@ public class DoGPass : ScriptableRenderPass
 
         CommandBuffer commandBuffer = CommandBufferPool.Get("Custom/Difference of Gaussians");
 
+        // Blur effect properties
+        int gridSize1 = Mathf.CeilToInt(dogPostProcess.blurIntensity1.value * 6f);
+        if (gridSize1 % 2 == 0) gridSize1++;
+        int gridSize2 = Mathf.CeilToInt(dogPostProcess.blurIntensity2.value * 6f);
+        if (gridSize2 % 2 == 0) gridSize2++;
 
-        _material.SetInteger("_kernelSize", dogPostProcess.kernelSize.value);
+        //_material.SetInteger("_kernelSize", dogPostProcess.kernelSize.value);
         _material.SetFloat("_threshhold", dogPostProcess.threshhold.value);
         _material.SetFloat("_tau", dogPostProcess.tau.value);
+        _material.SetFloat("_phi", dogPostProcess.phi.value);
+        _material.SetInteger("_invert", dogPostProcess.invert.value ? 1 : 0);
+        _material.SetInteger("_hyperbolic", dogPostProcess.hyperbolic.value ? 1 : 0);
 
         // First Gaussian
-        _material.SetFloat("_blurIntensity", dogPostProcess.blurIntensity1.value);
+        _material.SetFloat("_Spread", dogPostProcess.blurIntensity1.value);
+        _material.SetInteger("_GridSize", gridSize1);
         var gauss1 = RenderTexture.GetTemporary(Screen.width, Screen.height);
         Blit(commandBuffer, src, dst, _material, 0);
         Blit(commandBuffer, dst, gauss1, _material, 1); // Store the blurred texture
 
         // Second Gaussian
         _material.SetFloat("_blurIntensity", dogPostProcess.blurIntensity2.value);
+        _material.SetInteger("_GridSize", gridSize2);
         var gauss2 = RenderTexture.GetTemporary(Screen.width, Screen.height);
         Blit(commandBuffer, src, dst, _material, 0);
         Blit(commandBuffer, dst, gauss2, _material, 1); // Store the blurred texture
