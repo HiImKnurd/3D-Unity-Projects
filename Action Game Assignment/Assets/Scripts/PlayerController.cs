@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     public static System.Action<float, float> OnHealthChanged;
     [SerializeField] Slider _enemyHealthbar;
     public float _health;
-    [SerializeField] float _maxHealth = 100;
+    public float _maxHealth = 100;
     public float _stun;
     private float _hitAnimCD;
     public Vector3 _knockback;

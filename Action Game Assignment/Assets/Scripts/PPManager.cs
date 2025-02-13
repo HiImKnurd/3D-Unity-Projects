@@ -12,6 +12,8 @@ public class PPManager : MonoBehaviour
     private DifferenceOfGaussiansPostProcess DoG;
     private BWPostProcess bw;
     private GaussianPostProcess blur;
+    private ChromaticAberrationPostProcess ca;
+    float caSin = 0;
     [SerializeField][Range(0f, 0.5f)] float _hitstopthreshhold = 0.25f;
     [SerializeField] PlayerController playerController;
     // Start is called before the first frame update
@@ -29,7 +31,12 @@ public class PPManager : MonoBehaviour
         {
             blur.active = false;
             blur.blurIntensity.value = 0f;
-        }    
+        }
+        if(globalVolume.profile.TryGet<ChromaticAberrationPostProcess>(out ca))
+        {
+            ca.active = true;
+            ca.intensity.value = 0f;
+        }
     }
 
     // Update is called once per frame
@@ -44,6 +51,13 @@ public class PPManager : MonoBehaviour
             }
             blur.active = true;
             while(blur.blurIntensity.value < 10) blur.blurIntensity.value += 1f * Time.deltaTime;
+        }
+        else if(playerController._health < playerController._maxHealth * 0.5f)
+        {
+            float healthdiff = (playerController._maxHealth * 0.5f) - playerController._health;
+            ca.intensity.value = 0.5f + healthdiff * 0.025f;
+            ca.focalOffset.value = new Vector2 (Mathf.Sin(caSin), Mathf.Sin(caSin));
+            caSin += Time.deltaTime * healthdiff;
         }
     }
     public void StartHitstop(float duration, bool impact)

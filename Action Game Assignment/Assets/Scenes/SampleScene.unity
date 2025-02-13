@@ -802,6 +802,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 5a6ea9930ea10704ab36ffb86b039367, type: 3}
     - target: {fileID: 1809330419496724238, guid: 4dfd103dce6c7264bbfbb8e2e34e8830, type: 3}
+      propertyPath: _effects
+      value: 
+      objectReference: {fileID: 841082764}
+    - target: {fileID: 1809330419496724238, guid: 4dfd103dce6c7264bbfbb8e2e34e8830, type: 3}
       propertyPath: _jumpSFX
       value: 
       objectReference: {fileID: 8300000, guid: 0ab5f51e7840df04e9839dce20f99c6c, type: 3}
@@ -9616,6 +9620,53 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 657050780278502123, guid: 8dad8c4b72bd5a84cb27449d7e7320fd, type: 3}
   m_PrefabInstance: {fileID: 7018130031646708809}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &841082763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841082765}
+  - component: {fileID: 841082764}
+  m_Layer: 0
+  m_Name: Post Processing Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &841082764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841082763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b44f81a4adcd694e94554cd3ebd59cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalVolume: {fileID: 1817389386}
+  _hitstopthreshhold: 0.25
+  playerController: {fileID: 986682279}
+--- !u!4 &841082765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841082763}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -66862,6 +66913,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 5a6ea9930ea10704ab36ffb86b039367, type: 3}
     - target: {fileID: 1809330419496724238, guid: 8dad8c4b72bd5a84cb27449d7e7320fd, type: 3}
+      propertyPath: _effects
+      value: 
+      objectReference: {fileID: 841082764}
+    - target: {fileID: 1809330419496724238, guid: 8dad8c4b72bd5a84cb27449d7e7320fd, type: 3}
       propertyPath: _jumpSFX
       value: 
       objectReference: {fileID: 8300000, guid: 0ab5f51e7840df04e9839dce20f99c6c, type: 3}
@@ -67641,3 +67696,4 @@ SceneRoots:
   - {fileID: 1099204835}
   - {fileID: 982571770}
   - {fileID: 1817389387}
+  - {fileID: 841082765}

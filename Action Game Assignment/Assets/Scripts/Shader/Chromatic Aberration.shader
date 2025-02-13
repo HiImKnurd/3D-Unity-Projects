@@ -22,7 +22,7 @@ Shader "Custom Post-Processing/Chromatic Aberration"
             float4 _MainTex_ST;
             float4 _MainTex_TexelSize;
             float2 _focalOffset, _radius;
-            float _hardness, _intensity, _redOffset, _greenOffset, _blueOffset;
+            float _intensity, _redOffset, _greenOffset, _blueOffset;
 
             struct appdata
             {
@@ -51,7 +51,7 @@ Shader "Custom Post-Processing/Chromatic Aberration"
                 pos *= _radius;
 
                 float2 d = pos;
-                float intensity = saturate(pow(abs(length(pos)), _hardness)) * _intensity;
+                float intensity = saturate(pow(abs(length(pos)), 1.0f)) * _intensity;
 
                 float2 redUV = i.uv + (d * _redOffset * _MainTex_TexelSize.xy) * intensity;
                 float2 blueUV = i.uv + (d * _greenOffset * _MainTex_TexelSize.xy) * intensity;
@@ -62,7 +62,7 @@ Shader "Custom Post-Processing/Chromatic Aberration"
                 final.g = tex2D(_MainTex, blueUV).g;
                 final.b = tex2D(_MainTex, greenUV).b;
 
-                return col;
+                return final;
             }
             ENDHLSL
         }

@@ -34,7 +34,6 @@ public class ChromaticPass : ScriptableRenderPass
         // Set the blend intensity in the material 
         _mat.SetVector("_focalOffset", ca.focalOffset.value);
         _mat.SetVector("_radius", ca.radius.value);
-        _mat.SetFloat("_hardness", ca.hardness.value);
         _mat.SetFloat("_intensity", ca.intensity.value);
         _mat.SetFloat("_redOffset", ca.redOffset.value);
         _mat.SetFloat("_greenOffset", ca.greenOffset.value);
