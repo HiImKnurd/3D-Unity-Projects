@@ -146,14 +146,16 @@ Shader "Custom Post-Processing/Retro"
                 float4 output = tex2D(_MainTex, UV); // Color sampler
 
                 // Dithering
-                int x = i.uv.x * _MainTex_TexelSize.z;
-                int y = i.uv.y * _MainTex_TexelSize.w;
-                float bayerValues[3] = { 0, 0, 0 };
-                bayerValues[0] = GetBayer2(x, y);
-                bayerValues[1] = GetBayer4(x, y);
-                bayerValues[2] = GetBayer8(x, y);
+                if(_bayerLevel >= 0){
+                    int x = i.uv.x * _MainTex_TexelSize.z;
+                    int y = i.uv.y * _MainTex_TexelSize.w;
+                    float bayerValues[3] = { 0, 0, 0 };
+                    bayerValues[0] = GetBayer2(x, y);
+                    bayerValues[1] = GetBayer4(x, y);
+                    bayerValues[2] = GetBayer8(x, y);
 
-                output = output + 0.5f * bayerValues[_bayerLevel];
+                    output = output + 0.5f * bayerValues[_bayerLevel];
+                }
 
                 // Posterization
                 output.r = floor((_redCount - 1.0) * output.r + 0.5) / (_redCount - 1.0f);

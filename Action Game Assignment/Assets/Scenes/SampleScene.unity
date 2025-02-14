@@ -9650,7 +9650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   globalVolume: {fileID: 1817389386}
-  _hitstopthreshhold: 0.25
+  _hitstopthreshhold: 0.2
   playerController: {fileID: 986682279}
 --- !u!4 &841082765
 Transform:
@@ -67117,6 +67117,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3608820961792757196, guid: 8dad8c4b72bd5a84cb27449d7e7320fd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 27fba0d3d74992c40b0b3f85ca553de7, type: 2}
+    - target: {fileID: 3615100267694398702, guid: 8dad8c4b72bd5a84cb27449d7e7320fd, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 27fba0d3d74992c40b0b3f85ca553de7, type: 2}

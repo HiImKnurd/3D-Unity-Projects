@@ -28,7 +28,8 @@ Material:
     - _FadeDistance: 55
     - _QueueControl: 0
     - _Thickness: 0.025
-    m_Colors: []
+    m_Colors:
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8891230203202771283
 MonoBehaviour:

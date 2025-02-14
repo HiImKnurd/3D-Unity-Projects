@@ -49,11 +49,11 @@ Material:
     - _Max_Brightness: 2
     - _Min_Brightness: -0.07
     - _QueueControl: 0
-    - _Shades: 0.4
+    - _Shades: 0.5
     - _ShadowStep: 0
     m_Colors:
     - _Main_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _ShadowColor: {r: 0.09599856, g: 0.09599856, b: 0.3660378, a: 0}
+    - _ShadowColor: {r: 0.044663556, g: 0.045446035, b: 0.19245279, a: 0}
     - _ShadowPatternColor: {r: 0, g: 0, b: 0, a: 0}
     - _ShadowTiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

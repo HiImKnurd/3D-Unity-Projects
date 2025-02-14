@@ -13,7 +13,7 @@ public class RetroPostProcess : VolumeComponent, IPostProcessComponent
     [Tooltip("Affects the pixel count")]
     public FloatParameter pixelSize = new ClampedFloatParameter(0f, 0f, 20f);
     [Tooltip("Dithering level")]
-    public IntParameter bayerLevel = new ClampedIntParameter(2, 0, 2);
+    public IntParameter bayerLevel = new ClampedIntParameter(0, -1, 2);
     [Header("Posterization")]
     public IntParameter redColourCount = new ClampedIntParameter(25, 0, 256);
     public IntParameter greenColourCount = new ClampedIntParameter(25, 0, 256);
@@ -21,10 +21,7 @@ public class RetroPostProcess : VolumeComponent, IPostProcessComponent
 
     public bool IsActive()
     {
-        return ((pixelSize.value > 0) || 
-            redColourCount.value > 0 ||
-            greenColourCount.value > 0 ||
-            blueColourCount.value > 0) 
+        return (pixelSize.value > 0) 
             && active;
     }
 
