@@ -93,6 +93,22 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CinemachineVirtualCamera[] cameras = FindObjectsOfType<CinemachineVirtualCamera>();
+        foreach (CinemachineVirtualCamera cam in cameras)
+        {
+            if (cam.name == "Lockon Camera")
+            {
+                _camera = cam;
+                _camera.Follow = transform;
+                _camera.LookAt = transform;
+            }
+            else if(cam.name == "Free Camera")
+            {
+                _freecamera = cam;
+                _freecamera.LookAt = transform;
+            }
+        }
+
         _inputActions = _playerInput.actions;
         _combos = _comboHandler.combos;
         _inputs = GetComponent<InputController>();
@@ -100,9 +116,9 @@ public class PlayerController : MonoBehaviour
         if (_isPlayer)
         {
             _camera.Priority = 0; _freecamera.Priority = 0;
-            _activeCamera = _camera;
+            _activeCamera = _freecamera;
             _activeCamera.Priority = 10;
-            _camera.LookAt = _target.transform;
+            //_camera.LookAt = _target.transform;
         }
         _health = _maxHealth;
 

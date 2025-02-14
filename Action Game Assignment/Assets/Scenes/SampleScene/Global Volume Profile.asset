@@ -155,7 +155,7 @@ MonoBehaviour:
   active: 1
   blendIntensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -0
 --- !u!114 &8734136784914076003
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5cef162bd02b8046a9c64e553464010, type: 3}
   m_Name: PixelPostProcess
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   pixelSize:
     m_OverrideState: 1
     m_Value: 2

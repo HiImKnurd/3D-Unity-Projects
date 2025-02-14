@@ -2161,6 +2161,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6770939877284039335}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 909930832865029176}
   m_SourcePrefab: {fileID: 100100000, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
 --- !u!4 &738421137062419126 stripped
 Transform:
@@ -2212,6 +2215,7 @@ MonoBehaviour:
   _impulseSource: {fileID: 0}
   _target: {fileID: 0}
   _attackHandler: {fileID: 3810042550385966401}
+  _effects: {fileID: 0}
   _isPlayer: 0
   _isRunning: 0
   velocity: {x: 0, y: 0, z: 0}
@@ -2227,7 +2231,7 @@ MonoBehaviour:
   _dashSpeed: 15
   _dashTimer: 0.25
   _dashCD: 0.75
-  _enemyHealthbar: {fileID: 0}
+  _enemyHealthbar: {fileID: 3617385423701587239}
   _health: 0
   _maxHealth: 100
   _stun: 0
@@ -2254,16 +2258,16 @@ MonoBehaviour:
   cancel: 0
   _isBlocking: 0
   _isParrying: 0
-  _audioSource: {fileID: 0}
-  _blockSFX: {fileID: 0}
-  _parrySFX: {fileID: 0}
-  _dashSFX: {fileID: 0}
-  _jumpSFX: {fileID: 0}
-  _shield: {fileID: 0}
-  _dashTrail: {fileID: 0}
-  _parryEffect: {fileID: 0}
-  _shieldMaterial: {fileID: 0}
-  _parryMaterial: {fileID: 0}
+  _audioSource: {fileID: 6770939877284039335}
+  _blockSFX: {fileID: 8300000, guid: 87f380eecb7d4254e81ac46b8a528b6d, type: 3}
+  _parrySFX: {fileID: 8300000, guid: ddb4f15d436672343be989a8b19c2227, type: 3}
+  _dashSFX: {fileID: 8300000, guid: 5a6ea9930ea10704ab36ffb86b039367, type: 3}
+  _jumpSFX: {fileID: 8300000, guid: 0ab5f51e7840df04e9839dce20f99c6c, type: 3}
+  _shield: {fileID: 2219050338522025354}
+  _dashTrail: {fileID: 5243179506220632152}
+  _parryEffect: {fileID: 486454296136868178, guid: 80dec60757faa8947a53735ba744437b, type: 3}
+  _shieldMaterial: {fileID: 2100000, guid: ff0da4a77816d0043886bc3c21e4829e, type: 2}
+  _parryMaterial: {fileID: 2100000, guid: 1a655687b50a29841bf35244fc3e175c, type: 2}
 --- !u!114 &-9140931043871007860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2278,13 +2282,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   returntoNeutral: 0
   stateTimer: 0
-  character: {fileID: 0}
+  character: {fileID: 1809330419496724238}
   target: {fileID: 0}
-  inputs: {fileID: 0}
-  maxNeutralTime: 5
-  maxNeutralDistance: 5
-  approachDistance: 5
-  lockoutTime: 3
+  inputs: {fileID: 4634001276200813551}
+  maxNeutralTime: 3
+  maxNeutralDistance: 6
+  approachDistance: 4
+  lockoutTime: 1.5
 --- !u!114 &4634001276200813551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2349,7 +2353,7 @@ MonoBehaviour:
       cancelTime: 0.5
       damage: 7
       hitstun: 0.75
-      forwardKnockback: 10
+      forwardKnockback: 12
       upwardKnockback: 0
       knockdown: 0
       attackSFX: {fileID: 8300000, guid: c7b6e9d7f24a89d4eaa60742eb8e16ad, type: 3}
@@ -2381,7 +2385,7 @@ MonoBehaviour:
       cancelTime: 0.5
       damage: 10
       hitstun: 0.75
-      forwardKnockback: 10
+      forwardKnockback: 13
       upwardKnockback: 1.5
       knockdown: 1
       attackSFX: {fileID: 8300000, guid: c7b6e9d7f24a89d4eaa60742eb8e16ad, type: 3}
@@ -2463,7 +2467,7 @@ MonoBehaviour:
   _playerController: {fileID: 1809330419496724238}
   selfHurtbox: {fileID: 7854772549229945060}
   _audioSource: {fileID: 6770939877284039335}
-  _hitEffect: {fileID: 0}
+  _hitEffect: {fileID: 8484038879648105556, guid: f416437a137474644847664d84a3dece, type: 3}
 --- !u!143 &1774868772804785438
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2616,6 +2620,59 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &909930832865029176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8250977355030109132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!4 &8775981428797915510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
