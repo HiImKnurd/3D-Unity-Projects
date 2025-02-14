@@ -27,7 +27,7 @@ Material:
     m_Floats:
     - _FadeDistance: 55
     - _QueueControl: 0
-    - _Thickness: 0.025
+    - _Thickness: 0.0216
     m_Colors:
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

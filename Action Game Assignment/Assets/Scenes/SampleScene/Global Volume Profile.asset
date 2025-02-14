@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea5d02609f32404db222aecdcf00f0b, type: 3}
   m_Name: DoGPostProcess
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   blurIntensity1:
     m_OverrideState: 1
     m_Value: 1
@@ -24,13 +24,13 @@ MonoBehaviour:
     m_Value: 0.2
   tau:
     m_OverrideState: 1
-    m_Value: 3.5
+    m_Value: 2.68
   phi:
     m_OverrideState: 1
-    m_Value: 70
+    m_Value: 71
   invert:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   hyperbolic:
     m_OverrideState: 1
     m_Value: 1
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64df3acea28e6641926c1e7beb17f80, type: 3}
   m_Name: ChromaticAberrationPostProcess
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   focalOffset:
     m_OverrideState: 1
     m_Value: {x: 0, y: 0}
@@ -58,13 +58,13 @@ MonoBehaviour:
     m_Value: 0
   redOffset:
     m_OverrideState: 1
-    m_Value: -1.3
+    m_Value: -1.8
   blueOffset:
     m_OverrideState: 1
-    m_Value: 2.7
+    m_Value: 1.9
   greenOffset:
     m_OverrideState: 1
-    m_Value: 0.9
+    m_Value: 0.6
 --- !u!114 &-2673260970022080356
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -80,7 +80,7 @@ MonoBehaviour:
   active: 0
   blurIntensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
 --- !u!114 &-2111192507987187820
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -171,16 +171,16 @@ MonoBehaviour:
   active: 1
   pixelSize:
     m_OverrideState: 1
-    m_Value: 1.1
+    m_Value: 2
   bayerLevel:
     m_OverrideState: 1
-    m_Value: -1
+    m_Value: 0
   redColourCount:
     m_OverrideState: 1
-    m_Value: 30
+    m_Value: 20
   greenColourCount:
     m_OverrideState: 1
-    m_Value: 30
+    m_Value: 20
   blueColourCount:
     m_OverrideState: 1
     m_Value: 10
