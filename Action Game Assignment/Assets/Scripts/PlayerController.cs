@@ -15,11 +15,9 @@ using Cinemachine;
 using System;
 using UnityEngine.InputSystem.HID;
 using static Unity.VisualScripting.Member;
-using Unity.Netcode;
 
-public class PlayerController : NetworkBehaviour
+public class PlayerController : MonoBehaviour
 {
-    bool _initialized = false;
     [Header("Components")]
     [SerializeField] private Animator _animator;
     [SerializeField] private CharacterController _characterController;
@@ -92,34 +90,25 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] Material _shieldMaterial;
     [SerializeField] Material _parryMaterial;
 
-
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-        if (IsOwner)
-        {
-            CinemachineVirtualCamera[] cameras = FindObjectsOfType<CinemachineVirtualCamera>();
-            foreach (CinemachineVirtualCamera cam in cameras)
-            {
-                if (cam.name == "Lockon Camera")
-                {
-                    _camera = cam;
-                    _camera.Follow = transform;
-                    _camera.LookAt = transform;
-                }
-                else if (cam.name == "Free Camera")
-                {
-                    _freecamera = cam;
-                    _freecamera.LookAt = transform;
-                }
-            }
-            transform.position = new Vector3(0f, 1f, -17.5f);
-        }
-        Initialize();
-    }
     // Start is called before the first frame update
-    private void Initialize()
+    void Start()
     {
+        CinemachineVirtualCamera[] cameras = FindObjectsOfType<CinemachineVirtualCamera>();
+        foreach (CinemachineVirtualCamera cam in cameras)
+        {
+            if (cam.name == "Lockon Camera")
+            {
+                _camera = cam;
+                _camera.Follow = transform;
+                _camera.LookAt = transform;
+            }
+            else if(cam.name == "Free Camera")
+            {
+                _freecamera = cam;
+                _freecamera.LookAt = transform;
+            }
+        }
+
         _inputActions = _playerInput.actions;
         _combos = _comboHandler.combos;
         _inputs = GetComponent<InputController>();
@@ -134,15 +123,10 @@ public class PlayerController : NetworkBehaviour
         _health = _maxHealth;
 
         if(_shield != null) _shieldRenderer = _shield.GetComponent<MeshRenderer>();
-
-        _initialized = true;
     }
     // Update is called once per frame
     void Update()
     {
-        if(!_initialized) return;
-        if(!IsOwner) return;
-
         if (!_isGrounded && !_isDashing)
         {
             _verticalVelocity.y += _gravityScale * -9.81f * Time.deltaTime;
@@ -373,7 +357,6 @@ public class PlayerController : NetworkBehaviour
     }
     private void OnAnimatorMove()
     {
-        if (!IsOwner) return;
         if (_isDashing) return;
         if (_isInHitstun)
         {

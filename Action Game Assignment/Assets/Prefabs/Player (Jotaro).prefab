@@ -856,7 +856,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2004,21 +2004,15 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 2588076581671061319}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: -8181383471214341379}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
-      insertIndex: 3
       addedObject: {fileID: 1809330419496724238}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
-      insertIndex: 4
+      insertIndex: 2
       addedObject: {fileID: 5333675856706800483}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
-      insertIndex: 5
+      insertIndex: 3
       addedObject: {fileID: 3207911600815719226}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
-      insertIndex: 6
+      insertIndex: 4
       addedObject: {fileID: 3810042550385966401}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
       insertIndex: -1
@@ -2034,7 +2028,7 @@ PrefabInstance:
       addedObject: {fileID: 1938445691981508716}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -7201507178147303160}
+      addedObject: {fileID: 2588076581671061319}
   m_SourcePrefab: {fileID: 100100000, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
 --- !u!4 &738421137062419126 stripped
 Transform:
@@ -2066,58 +2060,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
   m_PrefabInstance: {fileID: 9097330490931783325}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2588076581671061319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8250977355030109132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 990995068
-  InScenePlacedSourceGlobalObjectIdHash: 990995068
-  AlwaysReplicateAsRoot: 1
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 0
---- !u!114 &-8181383471214341379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8250977355030109132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UseUnreliableDeltas: 0
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  UseQuaternionSynchronization: 0
-  UseQuaternionCompression: 0
-  UseHalfFloatPrecision: 0
-  InLocalSpace: 0
-  Interpolate: 1
-  SlerpPosition: 0
 --- !u!114 &1809330419496724238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2575,7 +2517,7 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
---- !u!114 &-7201507178147303160
+--- !u!114 &2588076581671061319
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2584,11 +2526,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8250977355030109132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad8deae8091111f4eb30a56c1f4e0d3e, type: 3}
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
-  m_Animator: {fileID: 0}
+  GlobalObjectIdHash: 3080849992
+  InScenePlacedSourceGlobalObjectIdHash: 990995068
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!4 &8775981428797915510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b4abf0c41fd5d3d47bd4bb8f86a8cdb0, type: 3}
