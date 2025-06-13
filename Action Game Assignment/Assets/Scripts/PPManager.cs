@@ -42,11 +42,6 @@ public class PPManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerController == null)
-        {
-            playerController = FindFirstObjectByType<PlayerController>();
-            return;
-        }
         if(playerController._isDead) 
         {
             if (!bw.IsActive())
